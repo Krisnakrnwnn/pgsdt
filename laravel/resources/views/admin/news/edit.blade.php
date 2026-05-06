@@ -69,10 +69,6 @@
                                 HAPUS
                             </button>
                         </div>
-                        <form id="delete-img-{{ $img->id }}" action="{{ route('admin.news.images.destroy', $img->id) }}" method="POST" style="display: none;">
-                            @csrf
-                            @method('DELETE')
-                        </form>
                     </div>
                 @endforeach
             </div>
@@ -84,6 +80,14 @@
             <a href="{{ route('admin.news.index') }}" style="padding: 10px 20px; background: #eee; color: #333; text-decoration: none; border-radius: 4px;">Batal</a>
         </div>
     </form>
+
+    {{-- Move hidden delete forms outside main form to avoid nested forms --}}
+    @foreach($news->images as $img)
+        <form id="delete-img-{{ $img->id }}" action="{{ route('admin.news.images.destroy', $img->id) }}" method="POST" style="display: none;">
+            @csrf
+            @method('DELETE')
+        </form>
+    @endforeach
   </div>
 </div>
 @endsection
