@@ -26,6 +26,40 @@
             max-width: 900px;
             padding: 0 20px;
         }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 45vh;
+                padding-top: 60px;
+            }
+            .event-content {
+                padding: 30px 0 !important;
+            }
+            .content-card {
+                padding: 25px 20px !important;
+            }
+            .meta-grid {
+                grid-template-columns: 1fr !important;
+            }
+            .meta-item {
+                padding: 15px !important;
+                border-bottom: 1px solid #eee;
+            }
+            .meta-item:last-child {
+                border-bottom: none;
+            }
+            .itinerary-table th, .itinerary-table td {
+                padding: 12px 10px !important;
+                font-size: 0.85rem !important;
+            }
+            .cta-card {
+                padding: 30px 20px !important;
+            }
+            .cta-card h3 {
+                font-size: 1.4rem !important;
+            }
+        }
     </style>
 @endsection
 
@@ -71,16 +105,16 @@
         <div style="display: grid; grid-template-columns: 1fr; gap: 40px; margin-top: -30px; position: relative; z-index: 10;">
             @if($event->registration_enabled)
             <!-- Meta Grid Card -->
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px; background: #eee; border: 1px solid #eee; border-radius: 0px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
-                <div style="background: white; padding: 25px; text-align: center;">
+            <div class="meta-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px; background: #eee; border: 1px solid #eee; border-radius: 0px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+                <div class="meta-item" style="background: white; padding: 25px; text-align: center;">
                     <span style="display: block; font-size: 0.75rem; color: #333; font-weight: 700; text-transform: uppercase; margin-bottom: 5px; letter-spacing: 1px;">Kapasitas / Kuota</span>
                     <strong style="color: var(--primary-dark); font-size: 1.2rem; font-family: 'Cinzel', serif;">{{ $event->quota }} Orang</strong>
                 </div>
-                <div style="background: white; padding: 25px; text-align: center;">
+                <div class="meta-item" style="background: white; padding: 25px; text-align: center;">
                     <span style="display: block; font-size: 0.75rem; color: #333; font-weight: 700; text-transform: uppercase; margin-bottom: 5px; letter-spacing: 1px;">Pendaftar Saat Ini</span>
                     <strong style="color: var(--primary-dark); font-size: 1.2rem; font-family: 'Cinzel', serif;">{{ $event->registrations_count ?? 0 }} Peserta</strong>
                 </div>
-                <div style="background: white; padding: 25px; text-align: center;">
+                <div class="meta-item" style="background: white; padding: 25px; text-align: center;">
                     <span style="display: block; font-size: 0.75rem; color: #333; font-weight: 700; text-transform: uppercase; margin-bottom: 5px; letter-spacing: 1px;">Status Pendaftaran</span>
                     @php
                         $isFull = ($event->registrations_count ?? 0) >= $event->quota;
@@ -91,7 +125,7 @@
             @endif
 
             <!-- Main Content Card -->
-            <div style="background: white; padding: 50px; border-radius: 0px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #eee;">
+            <div class="content-card" style="background: white; padding: 50px; border-radius: 0px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #eee;">
                 <h2 style="font-family: 'Cinzel', serif; color: var(--primary-dark); margin-bottom: 25px; font-size: 1.6rem; border-bottom: 3px solid var(--accent-gold); display: inline-block; padding-bottom: 8px;">Deskripsi Kegiatan</h2>
                 <div style="white-space: pre-line; line-height: 1.8; color: #333; font-size: 1.15rem;">
                     {{ $event->description }}
@@ -100,7 +134,7 @@
 
             <!-- Map Card -->
             @if($event->location_map)
-            <div style="background: white; padding: 30px; border-radius: 0px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #eee;">
+            <div class="content-card" style="background: white; padding: 30px; border-radius: 0px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #eee;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
                     <h2 style="font-family: 'Cinzel', serif; color: var(--primary-dark); margin: 0; font-size: 1.4rem; display: flex; align-items: center; gap: 10px;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="var(--accent-gold)" stroke-width="2" aria-hidden="true">
@@ -155,7 +189,7 @@
 
             <!-- Rundown Card -->
             @if($event->itinerary)
-            <div style="background: var(--card-bg); padding: 50px; border-radius: 0px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid rgba(212, 175, 55, 0.1); position: relative; overflow: hidden;">
+            <div class="content-card" style="background: var(--card-bg); padding: 50px; border-radius: 0px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid rgba(212, 175, 55, 0.1); position: relative; overflow: hidden;">
                 <!-- Subtle Ornament Background -->
                 <div style="position: absolute; top: -20px; right: -20px; opacity: 0.05; pointer-events: none;">
                     <svg width="200" height="200" viewBox="0 0 100 100">
@@ -170,7 +204,7 @@
                 </h2>
                 
                 <div style="overflow-x: auto;">
-                    <table style="width: 100%; border-collapse: separate; border-spacing: 0; border: 1px solid #eee; border-radius: 0px;">
+                    <table class="itinerary-table" style="width: 100%; border-collapse: separate; border-spacing: 0; border: 1px solid #eee; border-radius: 0px;">
                         <thead>
                             <tr style="background: var(--primary-dark); color: white;">
                                 <th style="padding: 20px 15px; text-align: center; width: 70px; font-size: 0.95rem; letter-spacing: 1px; border-bottom: 2px solid var(--accent-gold);">NO</th>
@@ -226,7 +260,7 @@
 
             <!-- Footer CTA Card -->
             @if($event->registration_enabled)
-            <div style="text-align: center; padding: 50px; background: var(--primary-dark); color: white; border-radius: 0px; border-bottom: 5px solid var(--accent-gold);">
+            <div class="cta-card" style="text-align: center; padding: 50px; background: var(--primary-dark); color: white; border-radius: 0px; border-bottom: 5px solid var(--accent-gold);">
                 @php
                     $isRegistered = false;
                     if (auth()->check()) {
