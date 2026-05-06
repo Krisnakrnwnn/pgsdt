@@ -5,6 +5,63 @@
 
 @section('head')
   <link rel="preload" as="image" href="{{ asset('assets/heritage_hero-opt.webp') }}" fetchpriority="high">
+  <style>
+    /* Responsive Adjustments for Agenda List */
+    @media (max-width: 768px) {
+        .upcoming-event-card {
+            border-radius: 0 !important;
+        }
+        .event-header {
+            padding: 20px !important;
+        }
+        .event-title {
+            font-size: 1.4rem !important;
+        }
+        .event-footer-grid {
+            grid-template-columns: 1fr !important;
+            gap: 0 !important;
+        }
+        .event-info-col {
+            padding: 20px !important;
+        }
+        .event-map-col {
+            border-left: none !important;
+            border-top: 1px solid #eee;
+            height: 250px !important;
+        }
+        .map-iframe-container {
+            height: 200px !important;
+        }
+        .event-meta-flex {
+            flex-direction: column !important;
+            gap: 10px !important;
+        }
+        .event-actions {
+            flex-direction: column !important;
+            width: 100%;
+        }
+        .event-actions .btn-primary, 
+        .event-actions .btn-outline {
+            width: 100%;
+            text-align: center;
+            justify-content: center;
+        }
+        
+        section[style*="padding: 80px 0"] {
+            padding: 40px 0 !important;
+        }
+        h2[style*="font-size: 1.8rem"] {
+            font-size: 1.4rem !important;
+        }
+    }
+    
+    /* Additional fixes for very small screens */
+    @media (max-width: 480px) {
+        .past-events-grid {
+            grid-template-columns: 1fr !important;
+        }
+    }
+  </style>
 @endsection
 
 @section('content')
@@ -129,7 +186,7 @@
             <div style="flex: 1; height: 1px; background: linear-gradient(to right, #ccc, transparent);"></div>
         </div>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px;">
+        <div class="past-events-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px;">
             @foreach($pastEvents as $event)
                 <div style="background: white; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); filter: grayscale(0.5); border: 1px solid #eee;">
                     <div style="padding: 25px;">
