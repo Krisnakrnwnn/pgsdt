@@ -85,7 +85,7 @@
       <a href="{{ url('/') }}" class="nav-brand">
         <picture>
           <source srcset="{{ asset('assets/Logo-60.webp') }}" type="image/webp">
-          <img src="{{ asset('assets/Logo-60.png') }}" alt="Dalem Tarukan Logo" class="brand-logo" width="40" height="40" loading="eager">
+          <img src="{{ asset('assets/Logo-60.png') }}" alt="Dalem Tarukan Logo" class="brand-logo" loading="eager">
         </picture>
         <span class="brand-name">Dalem Tarukan</span>
       </a>
