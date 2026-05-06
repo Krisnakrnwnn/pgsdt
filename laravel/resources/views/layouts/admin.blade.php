@@ -101,7 +101,13 @@
               <span class="user-name">{{ auth()->user()->name }}</span>
               <span class="user-role">{{ ucfirst(auth()->user()->role) }}</span>
             </div>
-            <div class="avatar">{{ strtoupper(substr(auth()->user()->name, 0, 1)) }}</div>
+            <div class="avatar" style="overflow: hidden; display: flex; align-items: center; justify-content: center; background: #f0f0f0;">
+              @if(auth()->user()->image_path)
+                <img src="{{ asset('storage/' . auth()->user()->image_path) }}" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover;">
+              @else
+                {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+              @endif
+            </div>
           </div>
         </div>
       </header>
