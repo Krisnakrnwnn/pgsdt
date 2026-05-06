@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events - Dalem Tarukan</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;700;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+  <style>
+    .schedule-table { width: 100%; border-collapse: collapse; margin-top: 30px; background: #fff; border-radius: 4px; overflow: hidden; border: 1px solid #eee; }
+    .schedule-table th, .schedule-table td { padding: 15px 20px; text-align: left; border-bottom: 1px solid #eee; }
+    .schedule-table th { background: var(--primary-dark); color: var(--accent-gold); text-transform: uppercase; font-size: 12px; letter-spacing: 1px; }
+    .schedule-table td { font-size: 14px; }
+    .schedule-table tr:hover { background: #fdfaf5; }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <img src="Logo.png" alt="Dalem Tarukan Logo" class="brand-logo">
+        <span class="brand-name">Dalem Tarukan</span>
+      </a>
+
+      <div class="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="news.html">News</a>
+        <a href="event.html" class="active">Events</a>
+        <a href="heritage.html">Heritage</a>
+        <a href="member.html" class="nav-cta">Join Member</a>
+      </div>
+
+      <div class="mobile-toggle">
+        <span style="width: 25px; height: 2px; background: var(--accent-gold); margin-bottom: 5px;"></span>
+        <span style="width: 20px; height: 2px; background: var(--accent-gold); margin-bottom: 5px;"></span>
+        <span style="width: 25px; height: 2px; background: var(--accent-gold);"></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
+      <h1>MUSYAWARAH AGUNG</h1>
+      <p>Dharma Santi & HUT Para Gotra Santana Dalem Tarukan Ke-57</p>
+    </div>
+  </section>
+
+  <!-- EVENT DETAILS -->
+  <section class="section-container">
+    <div class="section-header" style="text-align: left;" data-aos="fade-up">
+      <h2>INFORMASI ACARA</h2>
+    </div>
+    <div class="musyawarah-card" style="margin-bottom: 60px;" data-aos="fade-up">
+      <div class="musyawarah-content">
+        <span class="badge">MEI 2026</span>
+        <h2>Dharma Santi Nyepi 1948 & HUT PGSDT Ke-57</h2>
+        <p>Acara tahunan ini merupakan wadah bagi seluruh pasemetonan untuk berkumpul dan merayakan tonggak sejarah ke-57 tahun berdirinya organisasi pusat.</p>
+        <div class="event-details">
+          <span>📅 Minggu, 24 Mei 2026</span>
+          <span>📍 Balai Budaya Giri Nata Mandala, Badung</span>
+        </div>
+        <a href="#register" class="btn-primary">DAFTAR SEKARANG</a>
+      </div>
+    </div>
+
+    <!-- SCHEDULE FROM PDF -->
+    <div class="section-header" style="text-align: left;" data-aos="fade-up">
+      <h2>SUSUNAN ACARA</h2>
+    </div>
+    <table class="schedule-table" data-aos="fade-up">
+      <thead>
+        <tr>
+          <th>Waktu (WITA)</th>
+          <th>Kegiatan / Acara</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>08.00 – 08.30</td><td>Registrasi Peserta dan Undangan</td></tr>
+        <tr><td>08.30 – 09.00</td><td>Penayangan Video Selayang Pandang PGSDT</td></tr>
+        <tr><td>09.00 – 09.15</td><td>Dharmawacana Dharma Wiku</td></tr>
+        <tr><td>09.15 – 09.30</td><td>Prosesi Penyambutan Undangan VVIP</td></tr>
+        <tr><td>09.30 – 09.40</td><td>Menyanyikan Lagu Indonesia Raya & Doa</td></tr>
+        <tr><td>09.40 – 09.50</td><td>Pembacaan Sloka</td></tr>
+        <tr><td>09.50 – 09.55</td><td>Laporan Ketua Umum PGSDT</td></tr>
+        <tr><td>09.55 – 10.05</td><td>Sambutan Bupati Badung</td></tr>
+        <tr><td>10.05 – 10.20</td><td>Sambutan Gubernur Bali</td></tr>
+        <tr><td>10.20 – 10.45</td><td>Pemotongan Tumpeng HUT Ke-57</td></tr>
+        <tr><td>10.45 – 11.15</td><td>Hiburan Sekeha Kesenian PGSDT</td></tr>
+        <tr><td>11.15 – Selesai</td><td>Ramah Tamah dan Penutup</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- REGISTRATION FORM PREVIEW -->
+  <section id="register" class="section-container" style="background: #fff; border-top: 1px solid #eee;">
+    <div class="section-header" data-aos="fade-up">
+      <h2>PENDAFTARAN PESERTA</h2>
+    </div>
+    <div style="max-width: 600px; margin: 0 auto; background: #fdfaf5; padding: 40px; border-radius: 4px; border: 1px solid #eee;" data-aos="fade-up">
+      <p style="margin-bottom: 20px; font-size: 14px; color: #666;">Silakan isi formulir di bawah ini untuk mendaftarkan kehadiran Anda pada acara Musyawarah Agung.</p>
+      <form style="display: flex; flex-direction: column; gap: 20px;">
+        <input type="text" placeholder="Nama Lengkap" style="padding: 12px; border: 1px solid #ddd; border-radius: 4px; outline: none;">
+        <input type="text" placeholder="Asal Daerah / Dadia" style="padding: 12px; border: 1px solid #ddd; border-radius: 4px; outline: none;">
+        <input type="number" placeholder="Jumlah Peserta" style="padding: 12px; border: 1px solid #ddd; border-radius: 4px; outline: none;">
+        <button type="submit" class="btn-primary" style="border: none; cursor: pointer;">KIRIM PENDAFTARAN</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand" data-aos="fade-up">
+        <img src="Logo.png" alt="Dalem Tarukan Logo" class="footer-logo">
+        <h3>Dalem Tarukan</h3>
+        <p>Memperkuat Persaudaraan, Melestarikan Warisan Leluhur.</p>
+      </div>
+      
+      <div class="footer-links" data-aos="fade-up" data-aos-delay="100">
+        <h4>Navigasi</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="event.html">Events</a></li>
+          <li><a href="heritage.html">Heritage</a></li>
+          <li><a href="member.html">Join Member</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-contact" data-aos="fade-up" data-aos-delay="200">
+        <h4>Hubungi Kami</h4>
+        <ul>
+          <li style="align-items: flex-start;"><span style="min-width: 20px;">📍</span> <span>Sekretariat : Pura Pedharman Pusat Ida Bhatara Dalem Tarukan,<br>Pulasari, Peninjoan, Kec. Tembuku, Kab. Bangli</span></li>
+          <li><span style="min-width: 20px;">✉️</span> pgsdtpusat1969@gmail.com</li>
+          <li><span style="min-width: 20px;">📞</span> 081283144560, 08123919488</li>
+        </ul>
+      </div>
+
+      <div class="footer-social" data-aos="fade-up" data-aos-delay="300">
+        <h4>Media Sosial</h4>
+        <div class="social-icons">
+          <a href="#" class="social-icon" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Facebook">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+            </svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="YouTube">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path>
+              <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Para Gotra Santana Dalem Tarukan. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 50
+    });
+  </script>
+</body>
+</html>

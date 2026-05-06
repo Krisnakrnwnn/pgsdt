@@ -1,0 +1,14 @@
+/laravel/.env
+/laravel/vendor/
+/laravel/node_modules/
+/laravel/storage/*.key
+/laravel/storage/framework/cache/data/*
+/laravel/storage/framework/sessions/*
+/laravel/storage/framework/views/*
+/laravel/storage/logs/*
+/laravel/public/storage
+/public_html/storage/members/*
+/public_html/storage/news_images/*
+/public_html/storage/agendas/*
+.DS_Store
+Thumbs.db

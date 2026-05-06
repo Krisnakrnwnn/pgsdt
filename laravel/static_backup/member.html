@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Membership - Dalem Tarukan</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;700;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+  <style>
+    .form-group { margin-bottom: 25px; }
+    .form-group label { display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--primary-dark); }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 4px; outline: none; font-size: 14px; transition: border-color 0.3s ease; }
+    .form-group input:focus { border-color: var(--accent-gold); }
+    .file-upload { border: 2px dashed #ddd; padding: 30px; text-align: center; border-radius: 4px; cursor: pointer; transition: background 0.3s ease; }
+    .file-upload:hover { background: #fdfaf5; border-color: var(--accent-gold); }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <img src="Logo.png" alt="Dalem Tarukan Logo" class="brand-logo">
+        <span class="brand-name">Dalem Tarukan</span>
+      </a>
+
+      <div class="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="news.html">News</a>
+        <a href="event.html">Events</a>
+        <a href="heritage.html">Heritage</a>
+        <a href="member.html" class="nav-cta active">Join Member</a>
+      </div>
+
+      <div class="mobile-toggle">
+        <span style="width: 25px; height: 2px; background: var(--accent-gold); margin-bottom: 5px;"></span>
+        <span style="width: 20px; height: 2px; background: var(--accent-gold); margin-bottom: 5px;"></span>
+        <span style="width: 25px; height: 2px; background: var(--accent-gold);"></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
+      <h1>PENDAFTARAN ANGGOTA</h1>
+      <p>Bergabunglah Sebagai Bagian Resmi dari Pasemetonan Agung Dalem Tarukan</p>
+    </div>
+  </section>
+
+  <!-- REGISTRATION FORM -->
+  <section class="section-container">
+    <div style="max-width: 800px; margin: 0 auto; background: #fff; padding: 60px; border-radius: 4px; border: 1px solid #eee; box-shadow: 0 10px 30px rgba(0,0,0,0.02);" data-aos="fade-up">
+      <div class="section-header" style="text-align: left; margin-bottom: 40px;">
+        <h2>FORMULIR KEANGGOTAAN</h2>
+        <p style="margin-top: 10px; color: #666; font-size: 15px;">Harap lengkapi data diri Anda dengan benar sesuai dengan KTP untuk proses verifikasi keanggotaan.</p>
+      </div>
+
+      <form>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px;">
+          <div class="form-group">
+            <label>Nama Lengkap (Sesuai KTP)</label>
+            <input type="text" placeholder="Masukkan nama lengkap">
+          </div>
+          <div class="form-group">
+            <label>NIK (Nomor Induk Kependudukan)</label>
+            <input type="text" placeholder="16 Digit NIK">
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px;">
+          <div class="form-group">
+            <label>Tempat Lahir</label>
+            <input type="text" placeholder="Kota/Kabupaten">
+          </div>
+          <div class="form-group">
+            <label>Tanggal Lahir</label>
+            <input type="date">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Alamat Domisili Saat Ini</label>
+          <textarea rows="3" placeholder="Alamat lengkap, Kelurahan, Kecamatan, Kabupaten/Kota"></textarea>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px;">
+          <div class="form-group">
+            <label>Asal Dadia / Banjar</label>
+            <input type="text" placeholder="Contoh: Pulasari, Bangli">
+          </div>
+          <div class="form-group">
+            <label>Pekerjaan</label>
+            <input type="text" placeholder="Pekerjaan saat ini">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Foto KTP (Upload)</label>
+          <div class="file-upload">
+            <span style="font-size: 24px; display: block; margin-bottom: 10px;">📸</span>
+            <span style="font-size: 14px; color: #666;">Klik atau drag file KTP Anda di sini (JPG/PNG)</span>
+            <input type="file" style="display: none;">
+          </div>
+        </div>
+
+        <div style="margin-top: 40px;">
+          <button type="submit" class="btn-primary" style="width: 100%; border: none; cursor: pointer; padding: 18px;">KIRIM PENDAFTARAN & VERIFIKASI</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand" data-aos="fade-up">
+        <img src="Logo.png" alt="Dalem Tarukan Logo" class="footer-logo">
+        <h3>Dalem Tarukan</h3>
+        <p>Memperkuat Persaudaraan, Melestarikan Warisan Leluhur.</p>
+      </div>
+      
+      <div class="footer-links" data-aos="fade-up" data-aos-delay="100">
+        <h4>Navigasi</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="event.html">Events</a></li>
+          <li><a href="heritage.html">Heritage</a></li>
+          <li><a href="member.html">Join Member</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-contact" data-aos="fade-up" data-aos-delay="200">
+        <h4>Hubungi Kami</h4>
+        <ul>
+          <li style="align-items: flex-start;"><span style="min-width: 20px;">📍</span> <span>Sekretariat : Pura Pedharman Pusat Ida Bhatara Dalem Tarukan,<br>Pulasari, Peninjoan, Kec. Tembuku, Kab. Bangli</span></li>
+          <li><span style="min-width: 20px;">✉️</span> pgsdtpusat1969@gmail.com</li>
+          <li><span style="min-width: 20px;">📞</span> 081283144560, 08123919488</li>
+        </ul>
+      </div>
+
+      <div class="footer-social" data-aos="fade-up" data-aos-delay="300">
+        <h4>Media Sosial</h4>
+        <div class="social-icons">
+          <a href="#" class="social-icon" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Facebook">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+            </svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="YouTube">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path>
+              <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Para Gotra Santana Dalem Tarukan. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 50
+    });
+  </script>
+</body>
+
+</html>

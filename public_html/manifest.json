@@ -1,0 +1,28 @@
+{
+  "name": "Para Gotra Santana Dalem Tarukan",
+  "short_name": "PGSDT",
+  "description": "Portal resmi Para Gotra Santana Dalem Tarukan. Memperkuat persaudaraan dan melestarikan warisan leluhur Bali.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0a1f1c",
+  "theme_color": "#d4af37",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/assets/Logo-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/Logo-sm.png",
+      "sizes": "200x200",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": ["social", "lifestyle"],
+  "lang": "id-ID",
+  "dir": "ltr"
+}
