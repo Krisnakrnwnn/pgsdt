@@ -17,9 +17,7 @@ require __DIR__.'/../laravel/vendor/autoload.php';
 $app = require_once __DIR__.'/../laravel/bootstrap/app.php';
 
 // 4. Set Public Path (Agar Laravel tahu folder publiknya adalah public_html)
-$app->bind('path.public', function() {
-    return __DIR__;
-});
+$app->usePublicPath(__DIR__);
 
 // 5. Jalankan Aplikasi (INI YANG TADI KURANG)
 $app->handleRequest(Request::capture());
