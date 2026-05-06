@@ -280,6 +280,7 @@ Route::middleware(['auth', IsAdmin::class])->prefix('admin')->name('admin.')->gr
         return view('admin.dashboard', compact('newsCount', 'memberCount', 'pendingCount', 'recentMembers', 'eventCount', 'kabupatenStats', 'popularEvents'));
     });
     
+    Route::delete('news/images/{image}', [AdminNewsController::class, 'destroyImage'])->name('news.images.destroy');
     Route::resource('news', AdminNewsController::class);
     Route::patch('agendas/{agenda}/set-featured', [AdminAgendaController::class, 'setFeatured'])->name('agendas.set-featured');
     Route::get('agendas/{agenda}/registrations', [AdminAgendaRegistrationController::class, 'index'])->name('agendas.registrations');

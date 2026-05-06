@@ -58,9 +58,22 @@
         @if($news->images->count() > 0)
         <div style="margin-bottom: 20px;">
             <label style="display: block; font-weight: 600; margin-bottom: 8px;">Gambar Tersimpan</label>
-            <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px;">
                 @foreach($news->images as $img)
-                    <img src="{{ asset('storage/' . $img->image_path) }}" alt="News Image" style="height: 100px; border-radius: 4px; border: 1px solid #ddd;">
+                    <div style="position: relative; border: 1px solid #ddd; border-radius: 4px; overflow: hidden; background: #f9f9f9;">
+                        <img src="{{ asset('storage/' . $img->image_path) }}" alt="News Image" style="width: 100%; height: 100px; object-fit: cover; display: block;">
+                        <div style="padding: 5px; background: rgba(255,255,255,0.9); border-top: 1px solid #ddd; text-align: center;">
+                            <button type="button" 
+                                    onclick="if(confirm('Hapus gambar ini?')) { document.getElementById('delete-img-{{ $img->id }}').submit(); }" 
+                                    style="background: #e74c3c; color: white; border: none; padding: 4px 10px; border-radius: 3px; font-size: 0.7rem; cursor: pointer; font-weight: 600;">
+                                HAPUS
+                            </button>
+                        </div>
+                        <form id="delete-img-{{ $img->id }}" action="{{ route('admin.news.images.destroy', $img->id) }}" method="POST" style="display: none;">
+                            @csrf
+                            @method('DELETE')
+                        </form>
+                    </div>
                 @endforeach
             </div>
         </div>

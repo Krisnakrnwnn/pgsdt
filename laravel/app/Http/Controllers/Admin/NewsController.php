@@ -115,6 +115,21 @@ class NewsController extends Controller
         return redirect()->route('admin.news.index')->with('success', 'Berita berhasil dihapus.');
     }
 
+    public function destroyImage(NewsImage $image)
+    {
+        $newsId = $image->news_id;
+        
+        // Hapus file fisik
+        if (Storage::disk('public')->exists($image->image_path)) {
+            Storage::disk('public')->delete($image->image_path);
+        }
+        
+        // Hapus record database
+        $image->delete();
+
+        return redirect()->route('admin.news.edit', $newsId)->with('success', 'Gambar berhasil dihapus.');
+    }
+
     /**
      * Simpan gambar dengan kompresi otomatis (max 1200px, JPEG quality 80)
      */
