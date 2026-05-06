@@ -2,6 +2,43 @@
 
 @section('title', 'Pendaftaran Acara - ' . $agenda->title)
 
+@section('head')
+<style>
+    @media (max-width: 768px) {
+        .registration-page {
+            padding: 80px 0 40px !important;
+        }
+        .registration-header {
+            padding: 30px 20px !important;
+        }
+        .registration-header h2 {
+            font-size: 1.5rem !important;
+        }
+        .registration-body {
+            padding: 25px 20px !important;
+        }
+        .brief-info {
+            gap: 15px !important;
+            padding: 15px !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+        }
+        .form-grid {
+            grid-template-columns: 1fr !important;
+            gap: 15px !important;
+        }
+        .action-btns {
+            flex-direction: column-reverse !important;
+            gap: 12px !important;
+        }
+        .action-btns > * {
+            flex: none !important;
+            width: 100% !important;
+        }
+    }
+</style>
+@endsection
+
 @section('content')
 <section class="registration-page" style="padding: 120px 0 80px; background: var(--section-bg);">
     <div class="container" style="max-width: 800px; margin: 0 auto; padding: 0 20px;">
@@ -16,15 +53,15 @@
         </a>
         <div data-aos="fade-up" style="background: var(--primary-dark); border-radius: 0px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.3); border: 1px solid rgba(212, 175, 55, 0.2);">
             <!-- Header -->
-            <div style="background: linear-gradient(to bottom, rgba(212, 175, 55, 0.1), transparent); padding: 50px 40px; text-align: center; border-bottom: 1px solid rgba(212, 175, 55, 0.1);">
+            <div class="registration-header" style="background: linear-gradient(to bottom, rgba(212, 175, 55, 0.1), transparent); padding: 50px 40px; text-align: center; border-bottom: 1px solid rgba(212, 175, 55, 0.1);">
                 <span style="color: var(--accent-gold); letter-spacing: 3px; font-weight: 700; text-transform: uppercase; font-size: 0.75rem; display: block; margin-bottom: 15px;">KONFIRMASI KEHADIRAN</span>
                 <h2 style="font-family: 'Cinzel', serif; margin: 0; font-size: 2.2rem; color: white; line-height: 1.2;">{{ $agenda->title }}</h2>
             </div>
 
             <!-- Body -->
-            <div style="padding: 40px;">
+            <div class="registration-body" style="padding: 40px;">
                 <!-- Event Brief Info -->
-                <div style="background: rgba(255,255,255,0.03); padding: 25px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 40px; display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; font-size: 1rem; color: var(--accent-gold-light); font-weight: 600;">
+                <div class="brief-info" style="background: rgba(255,255,255,0.03); padding: 25px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 40px; display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; font-size: 1rem; color: var(--accent-gold-light); font-weight: 600;">
                     <div style="display: flex; gap: 10px; align-items: center;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -43,7 +80,7 @@
                 <form action="{{ route('events.register.store', $agenda->slug) }}" method="POST">
                     @csrf
                     
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px;">
+                    <div class="form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px;">
                         <div>
                             <label style="display: block; margin-bottom: 10px; font-weight: 600; color: #aaa; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">Nama Lengkap</label>
                             <input type="text" value="{{ Auth::user()->name }}" disabled style="width: 100%; padding: 14px; border: 1px solid rgba(255,255,255,0.1); border-radius: 0px; background: rgba(255,255,255,0.05); color: #fff; cursor: not-allowed; font-family: 'Cinzel', serif;">
@@ -97,7 +134,7 @@
                         </p>
                     </div>
 
-                    <div style="display: flex; gap: 20px;">
+                    <div class="action-btns" style="display: flex; gap: 20px;">
                         <a href="{{ route('events.show', $agenda->slug) }}" style="flex: 1; padding: 18px; border: 1px solid rgba(255,255,255,0.1); border-radius: 0px; text-align: center; text-decoration: none; color: #fff; font-weight: 700; font-size: 0.8rem; letter-spacing: 2px;">BATAL</a>
                         <button type="submit" class="btn-primary" style="flex: 2; border: none; cursor: pointer; border-radius: 0px; padding: 18px; font-weight: 700; letter-spacing: 2px;">KONFIRMASI KEHADIRAN</button>
                     </div>
