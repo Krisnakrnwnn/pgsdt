@@ -23,6 +23,11 @@ return Application::configure(basePath: dirname(__DIR__))
 
         // No-cache untuk HTML agar tidak konflik cache antar project
         $middleware->append(\App\Http\Middleware\NoCacheHeaders::class);
+
+        // Pastikan profil lengkap untuk member
+        $middleware->web(append: [
+            \App\Http\Middleware\CheckProfileCompletion::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
