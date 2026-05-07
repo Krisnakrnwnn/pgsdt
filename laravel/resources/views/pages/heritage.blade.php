@@ -5,7 +5,7 @@
 
 @section('content')
     <!-- HERO SECTION -->
-    <section class="hero-fullscreen" style="background-image: url('{{ asset('assets/heritage_1.png') }}'); background-attachment: fixed;">
+    <section class="hero hero-fullscreen" style="background-image: url('{{ asset('assets/heritage_1.png') }}'); background-attachment: fixed; background-color: var(--primary-dark);">
         <div class="hero-content" data-aos="zoom-out" data-aos-duration="1500">
             <span class="badge" style="margin-bottom: 10px;">Jejak Leluhur</span>
             <h1 style="font-family: 'Cinzel Decorative', serif; font-size: clamp(2.5rem, 10vw, 5rem); margin-bottom: 20px; text-shadow: 0 4px 20px rgba(0,0,0,0.5);">Babad Dalem Tarukan</h1>
