@@ -113,6 +113,19 @@
             <button type="submit" class="btn-primary" style="width: 100%; padding: 18px; border-radius: 0; border: none; cursor: pointer; font-size: 1rem; letter-spacing: 3px;">
                 DAFTAR SEKARANG
             </button>
+
+            <div style="margin: 25px 0; display: flex; align-items: center; justify-content: center;">
+                <div style="flex: 1; height: 1px; background: rgba(255,255,255,0.1);"></div>
+                <span style="margin: 0 15px; color: rgba(255,255,255,0.3); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px;">Atau</span>
+                <div style="flex: 1; height: 1px; background: rgba(255,255,255,0.1);"></div>
+            </div>
+
+            <a href="{{ route('auth.google') }}" style="width: 100%; padding: 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 0.9rem; font-family: 'Inter', sans-serif; transition: all 0.3s; box-sizing: border-box;" 
+               onmouseover="this.style.background='rgba(255,255,255,0.1)'; this.style.borderColor='rgba(212,175,55,0.5)'" 
+               onmouseout="this.style.background='rgba(255,255,255,0.05)'; this.style.borderColor='rgba(255,255,255,0.1)'">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" style="width: 18px; margin-right: 12px;">
+                DAFTAR DENGAN GOOGLE
+            </a>
           </form>
 
           <div style="text-align: center; margin-top: 30px; font-size: 0.9rem; color: #888;">
