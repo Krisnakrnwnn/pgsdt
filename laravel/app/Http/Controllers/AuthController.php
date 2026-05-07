@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
+use App\Models\User;
+use Exception;
 
 class AuthController extends Controller
 {
@@ -169,5 +172,78 @@ class AuthController extends Controller
         $user->forceDelete();
 
         return redirect('/member')->with('success', 'Silakan perbaiki data pendaftaran Anda.');
+    }
+
+    /**
+     * Redirect the user to the Google authentication page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    /**
+     * Obtain the user information from Google.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function handleGoogleCallback()
+    {
+        try {
+            $googleUser = Socialite::driver('google')->user();
+            
+            // Check if user already exists with this google_id
+            $user = User::where('google_id', $googleUser->id)->first();
+
+            if ($user) {
+                // If user exists, log them in
+                Auth::login($user);
+                return redirect()->intended(Auth::user()->role === 'admin' ? 'admin' : '/');
+            }
+
+            // If google_id doesn't exist, check by email
+            $user = User::where('email', $googleUser->email)->first();
+
+            if ($user) {
+                // Link google_id to existing account
+                $user->update([
+                    'google_id' => $googleUser->id,
+                    'google_token' => $googleUser->token,
+                ]);
+                Auth::login($user);
+            } else {
+                // Create a new user
+                $user = User::create([
+                    'name' => $googleUser->name,
+                    'email' => $googleUser->email,
+                    'google_id' => $googleUser->id,
+                    'google_token' => $googleUser->token,
+                    'role' => 'member',
+                    'member_status' => 'pending', // Google users are pending until profile is completed
+                    'password' => null, // No local password
+                ]);
+
+                // We might need to generate a register number here too if it's mandatory for business logic
+                do {
+                    $registerNumber = 'PGSDT-' . date('Ym') . str_pad(random_int(1, 99999), 5, '0', STR_PAD_LEFT);
+                } while (User::withTrashed()->where('register_number', $registerNumber)->exists());
+                
+                $user->update(['register_number' => $registerNumber]);
+
+                Auth::login($user);
+            }
+
+            // Check if profile is complete (e.g. has NIK)
+            if (!$user->nik) {
+                return redirect()->route('profile.edit')->with('info', 'Harap lengkapi profil Anda (NIK, No. HP, dan Alamat) untuk menyelesaikan pendaftaran.');
+            }
+
+            return redirect()->intended('/');
+
+        } catch (Exception $e) {
+            return redirect('/login')->withErrors(['email' => 'Gagal masuk menggunakan Google. Silakan coba lagi.']);
+        }
     }
 }

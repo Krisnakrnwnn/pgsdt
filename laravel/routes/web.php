@@ -130,6 +130,10 @@ Route::get('/profile', [AuthController::class, 'profile'])->name('profile')->mid
 Route::get('/profile/edit', [AuthController::class, 'editProfile'])->name('profile.edit')->middleware('auth');
 Route::put('/profile', [AuthController::class, 'updateProfile'])->name('profile.update')->middleware(['auth', 'throttle:10,1']);
 
+// Google OAuth Routes
+Route::get('/auth/google', [AuthController::class, 'redirectToGoogle'])->name('auth.google');
+Route::get('/auth/google/callback', [AuthController::class, 'handleGoogleCallback']);
+
 // Password Reset Routes
 Route::get('/forgot-password', function () {
     return view('auth.forgot-password');
