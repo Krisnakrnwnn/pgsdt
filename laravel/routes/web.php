@@ -14,12 +14,22 @@ use App\Http\Controllers\Admin\AgendaRegistrationController as AdminAgendaRegist
 use App\Http\Middleware\IsAdmin;
 
 Route::get('/api/wilayah/regencies', function () {
-    $path = public_path('data/regencies-51.json');
-    if (!file_exists($path)) {
-        $path = base_path('../public_html/data/regencies-51.json');
+    $paths = [
+        public_path('data/regencies-51.json'),
+        base_path('../public_html/data/regencies-51.json'),
+        base_path('public/data/regencies-51.json'),
+        realpath(__DIR__ . '/../public/data/regencies-51.json')
+    ];
+
+    $path = null;
+    foreach ($paths as $p) {
+        if ($p && file_exists($p)) {
+            $path = $p;
+            break;
+        }
     }
     
-    if (!file_exists($path)) abort(404, 'Data regencies tidak ditemukan di ' . $path);
+    if (!$path) abort(404, 'Data regencies tidak ditemukan. Pastikan folder data ada di public_html.');
     
     return response(file_get_contents($path))
         ->header('Content-Type', 'application/json')
@@ -29,12 +39,22 @@ Route::get('/api/wilayah/regencies', function () {
 
 Route::get('/api/wilayah/districts/{regencyId}', function ($regencyId) {
     $regencyId = preg_replace('/[^0-9]/', '', $regencyId);
-    $path = public_path("data/districts-{$regencyId}.json");
-    if (!file_exists($path)) {
-        $path = base_path("../public_html/data/districts-{$regencyId}.json");
+    $paths = [
+        public_path("data/districts-{$regencyId}.json"),
+        base_path("../public_html/data/districts-{$regencyId}.json"),
+        base_path("public/data/districts-{$regencyId}.json"),
+        realpath(__DIR__ . "/../public/data/districts-{$regencyId}.json")
+    ];
+
+    $path = null;
+    foreach ($paths as $p) {
+        if ($p && file_exists($p)) {
+            $path = $p;
+            break;
+        }
     }
     
-    if (!file_exists($path)) return response()->json([]);
+    if (!$path) return response()->json([]);
     
     return response(file_get_contents($path))
         ->header('Content-Type', 'application/json')
@@ -44,12 +64,22 @@ Route::get('/api/wilayah/districts/{regencyId}', function ($regencyId) {
 
 Route::get('/api/wilayah/villages/{districtId}', function ($districtId) {
     $districtId = preg_replace('/[^0-9]/', '', $districtId);
-    $path = public_path("data/villages-{$districtId}.json");
-    if (!file_exists($path)) {
-        $path = base_path("../public_html/data/villages-{$districtId}.json");
+    $paths = [
+        public_path("data/villages-{$districtId}.json"),
+        base_path("../public_html/data/villages-{$districtId}.json"),
+        base_path("public/data/villages-{$districtId}.json"),
+        realpath(__DIR__ . "/../public/data/villages-{$districtId}.json")
+    ];
+
+    $path = null;
+    foreach ($paths as $p) {
+        if ($p && file_exists($p)) {
+            $path = $p;
+            break;
+        }
     }
     
-    if (!file_exists($path)) return response()->json([]);
+    if (!$path) return response()->json([]);
     
     return response(file_get_contents($path))
         ->header('Content-Type', 'application/json')
