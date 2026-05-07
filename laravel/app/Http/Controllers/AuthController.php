@@ -22,18 +22,11 @@ class AuthController extends Controller
             'password' => ['required', 'string', 'min:1', 'max:255'],
         ]);
 
-        // Cek apakah user ada (termasuk yang dihapus/soft-delete)
-        $user = \App\Models\User::withTrashed()->where('email', $request->email)->first();
-        
+        // Cek apakah user ada dan tidak di-soft-delete
+        $user = \App\Models\User::where('email', $request->email)->first();
         if (!$user) {
             return back()->withErrors([
                 'email' => 'Kredensial yang diberikan tidak cocok dengan data kami.',
-            ])->onlyInput('email');
-        }
-
-        if ($user->trashed()) {
-            return back()->withErrors([
-                'email' => 'Akun Anda telah dinonaktifkan oleh administrator. Silakan hubungi dukungan.',
             ])->onlyInput('email');
         }
 
@@ -62,15 +55,25 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $request->validate([
-            'nik' => ['required', 'string', 'size:16', 'regex:/^[0-9]{16}$/', \Illuminate\Validation\Rule::unique('users', 'nik')],
+            'nik' => ['required', 'string', 'size:16', 'regex:/^[0-9]{16}$/', \Illuminate\Validation\Rule::unique('users', 'nik')->withoutTrashed()],
             'name' => 'required|string|max:255',
-            'email' => ['required', 'string', 'email', 'max:255', \Illuminate\Validation\Rule::unique('users', 'email')],
+            'email' => ['required', 'string', 'email', 'max:255', \Illuminate\Validation\Rule::unique('users', 'email')->withoutTrashed()],
             'password' => 'required|string|min:8|confirmed',
             'phone' => 'required|string|max:20',
             'kabupaten' => 'required|string',
             'kecamatan' => 'required|string',
             'desa' => 'required|string',
         ]);
+        
+        // Jika ada user yang sudah di-soft-delete dengan email atau NIK yang sama, 
+        // hapus permanen agar bisa mendaftar ulang (menghindari error unique constraint di DB)
+        User::withTrashed()
+            ->where(function($query) use ($request) {
+                $query->where('email', $request->email)
+                      ->orWhere('nik', $request->nik);
+            })
+            ->whereNotNull('deleted_at')
+            ->forceDelete();
 
         // Generate register number yang unik — pakai loop untuk hindari collision
         do {
@@ -141,7 +144,7 @@ class AuthController extends Controller
         
         $request->validate([
             'name'      => 'required|string|max:255|regex:/^[\pL\s\-\.]+$/u',
-            'nik'       => ['required', 'string', 'size:16', 'regex:/^[0-9]{16}$/', \Illuminate\Validation\Rule::unique('users', 'nik')->ignore($user->id)],
+            'nik'       => ['required', 'string', 'size:16', 'regex:/^[0-9]{16}$/', \Illuminate\Validation\Rule::unique('users', 'nik')->ignore($user->id)->withoutTrashed()],
             'phone'     => 'nullable|string|max:20|regex:/^[0-9\+\-\s]+$/',
             'kabupaten' => 'required|string|max:100',
             'kecamatan' => 'required|string|max:100',
@@ -216,12 +219,8 @@ class AuthController extends Controller
         try {
             $googleUser = Socialite::driver('google')->user();
             
-            // Check if user already exists with this google_id (including trashed)
-            $user = User::withTrashed()->where('google_id', $googleUser->id)->first();
-            
-            if ($user && $user->trashed()) {
-                return redirect('/login')->withErrors(['email' => 'Akun Anda telah dinonaktifkan oleh administrator.']);
-            }
+            // Check if user already exists with this google_id
+            $user = User::where('google_id', $googleUser->id)->first();
 
             if ($user) {
                 // If user exists, update token and log them in
@@ -243,12 +242,8 @@ class AuthController extends Controller
                 return redirect()->intended(Auth::user()->role === 'admin' ? 'admin' : '/');
             }
 
-            // If google_id doesn't exist, check by email (including trashed)
-            $user = User::withTrashed()->where('email', $googleUser->email)->first();
-
-            if ($user && $user->trashed()) {
-                return redirect('/login')->withErrors(['email' => 'Akun Anda telah dinonaktifkan oleh administrator.']);
-            }
+            // If google_id doesn't exist, check by email
+            $user = User::where('email', $googleUser->email)->first();
 
             if ($user) {
                 // Link google_id to existing account
@@ -268,6 +263,13 @@ class AuthController extends Controller
 
                 Auth::login($user);
             } else {
+                // Jika ada user yang sudah di-soft-delete dengan email yang sama,
+                // hapus permanen agar bisa buat akun baru via Google
+                User::withTrashed()
+                    ->where('email', $googleUser->email)
+                    ->whereNotNull('deleted_at')
+                    ->forceDelete();
+
                 // Create a new user
                 $user = User::create([
                     'name' => $googleUser->name,
