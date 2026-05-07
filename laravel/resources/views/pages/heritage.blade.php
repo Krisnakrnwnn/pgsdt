@@ -147,6 +147,35 @@
         </div>
     </section>
 
+    <!-- REFERENCES SECTION -->
+    <section style="padding: 80px 0; background: white;">
+        <div class="container" style="max-width: 1000px; margin: 0 auto; padding: 0 40px;">
+            <div style="border-top: 1px solid #eee; padding-top: 50px;">
+                <h3 style="font-family: 'Cinzel', serif; font-size: 1.5rem; color: var(--primary-dark); margin-bottom: 30px; display: flex; align-items: center; gap: 15px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 24px; height: 24px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18 18.247 18.477 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                    Referensi & Sumber Akademik
+                </h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                    <ul style="list-style: none; padding: 0; color: #666; font-size: 0.95rem; line-height: 1.8;">
+                        <li style="margin-bottom: 12px; display: flex; gap: 10px;"><span style="color: var(--accent-gold);">•</span> <div><strong>Babad Dalem</strong> — Penaklukan Bali oleh Majapahit & Pengangkatan Sri Aji Kresna Kepakisan.</div></li>
+                        <li style="margin-bottom: 12px; display: flex; gap: 10px;"><span style="color: var(--accent-gold);">•</span> <div><strong>Babad Arya Tabanan</strong> — Kedatangan Bangsawan Majapahit ke Bali.</div></li>
+                        <li style="margin-bottom: 12px; display: flex; gap: 10px;"><span style="color: var(--accent-gold);">•</span> <div><strong>Negarakertagama</strong> — Catatan wilayah kekuasaan Majapahit era Hayam Wuruk.</div></li>
+                    </ul>
+                    <ul style="list-style: none; padding: 0; color: #666; font-size: 0.95rem; line-height: 1.8;">
+                        <li style="margin-bottom: 12px; display: flex; gap: 10px;"><span style="color: var(--accent-gold);">•</span> <div><strong>I Gusti Bagus Sugriwa</strong> — Karya sejarah Bali kuno dan era Majapahit.</div></li>
+                        <li style="margin-bottom: 12px; display: flex; gap: 10px;"><span style="color: var(--accent-gold);">•</span> <div><strong>Anak Agung Gde Agung</strong> — <em>Bali pada Abad XIX</em> (Struktur Kerajaan Pasca-Majapahit).</div></li>
+                        <li style="margin-bottom: 12px; display: flex; gap: 10px;"><span style="color: var(--accent-gold);">•</span> <div><strong>Repositori Universitas Udayana</strong> — Jurnal sejarah Dinasti Kepakisan & Samprangan.</div></li>
+                    </ul>
+                </div>
+                <div style="margin-top: 40px; padding: 20px; background: var(--section-bg); border-radius: 4px; font-size: 0.85rem; color: #888; font-style: italic;">
+                    Catatan: Sejarah Bali abad ke-14 banyak bersumber dari babad dan lontar tradisional, sehingga detail tahun dan silsilah mungkin memiliki variasi antar sumber.
+                </div>
+            </div>
+        </div>
+    </section>
+
     <style>
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);}
