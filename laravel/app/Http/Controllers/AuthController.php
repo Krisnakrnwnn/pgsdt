@@ -198,7 +198,16 @@ class AuthController extends Controller
             $user = User::where('google_id', $googleUser->id)->first();
 
             if ($user) {
-                // If user exists, log them in
+                // If user exists, update token and log them in
+                $user->update([
+                    'google_token' => $googleUser->token,
+                ]);
+                
+                // Also ensure email is verified since they logged in via Google
+                if (!$user->hasVerifiedEmail()) {
+                    $user->markEmailAsVerified();
+                }
+
                 Auth::login($user);
                 return redirect()->intended(Auth::user()->role === 'admin' ? 'admin' : '/');
             }
@@ -212,6 +221,11 @@ class AuthController extends Controller
                     'google_id' => $googleUser->id,
                     'google_token' => $googleUser->token,
                 ]);
+
+                if (!$user->hasVerifiedEmail()) {
+                    $user->markEmailAsVerified();
+                }
+
                 Auth::login($user);
             } else {
                 // Create a new user
@@ -223,9 +237,10 @@ class AuthController extends Controller
                     'role' => 'member',
                     'member_status' => 'pending', // Google users are pending until profile is completed
                     'password' => null, // No local password
+                    'email_verified_at' => now(), // Directly mark as verified
                 ]);
 
-                // We might need to generate a register number here too if it's mandatory for business logic
+                // We might need to generate a register number here too
                 do {
                     $registerNumber = 'PGSDT-' . date('Ym') . str_pad(random_int(1, 99999), 5, '0', STR_PAD_LEFT);
                 } while (User::withTrashed()->where('register_number', $registerNumber)->exists());
