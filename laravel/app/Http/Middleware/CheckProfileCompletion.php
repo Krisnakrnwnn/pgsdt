@@ -30,9 +30,10 @@ class CheckProfileCompletion
             }
 
             if ($isIncomplete) {
-                // Allow access to profile edit, profile update, and logout
+                // Allow access to profile edit, profile update, logout, and AJAX/API calls
                 $allowedRoutes = ['profile.edit', 'profile.update', 'logout'];
-                if (!$request->routeIs($allowedRoutes)) {
+                
+                if (!$request->routeIs($allowedRoutes) && !$request->is('api/*')) {
                     return redirect()->route('profile.edit')
                         ->with('warning', 'Harap lengkapi profil Anda (NIK, No. HP, dan Alamat) sebelum melanjutkan.');
                 }
