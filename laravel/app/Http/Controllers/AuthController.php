@@ -33,6 +33,13 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
+            $user = Auth::user();
+            if (!$user->hasVerifiedEmail()) {
+                $user->markEmailAsVerified();
+                $user->member_status = 'active';
+                $user->save();
+            }
+
             if (Auth::user()->role === 'admin') {
                 return redirect()->intended('admin');
             }
@@ -77,18 +84,26 @@ class AuthController extends Controller
             'member_status' => 'pending',
         ]);
 
-        // Send email verification
-        event(new \Illuminate\Auth\Events\Registered($user));
+        // Langsung tandai sebagai terverifikasi dan aktif
+        $user->markEmailAsVerified();
+        $user->member_status = 'active';
+        $user->save();
+
+        // Kirim notifikasi selamat datang (Opsional, tapi bagus untuk user)
+        $user->notify(new \App\Notifications\MemberVerifiedNotification('approved'));
+
+        // Tetap trigger event Registered jika ingin kirim email welcome (bukan link verifikasi)
+        // event(new \Illuminate\Auth\Events\Registered($user));
 
         // Kirim notifikasi ke semua admin
-        $admins = \App\Models\User::where('role', 'admin')->get();
+        $admins = User::where('role', 'admin')->get();
         foreach ($admins as $admin) {
             $admin->notify(new \App\Notifications\MemberRegisteredNotification($user));
         }
 
         Auth::login($user);
 
-        return redirect()->route('verification.notice');
+        return redirect('/')->with('success', 'Pendaftaran berhasil! Akun Anda telah otomatis aktif.');
     }
 
     public function logout(Request $request)
@@ -208,6 +223,11 @@ class AuthController extends Controller
                     $user->markEmailAsVerified();
                 }
 
+                if ($user->member_status !== 'active') {
+                    $user->member_status = 'active';
+                    $user->save();
+                }
+
                 Auth::login($user);
                 return redirect()->intended(Auth::user()->role === 'admin' ? 'admin' : '/');
             }
@@ -226,6 +246,11 @@ class AuthController extends Controller
                     $user->markEmailAsVerified();
                 }
 
+                if ($user->member_status !== 'active') {
+                    $user->member_status = 'active';
+                    $user->save();
+                }
+
                 Auth::login($user);
             } else {
                 // Create a new user
@@ -235,9 +260,9 @@ class AuthController extends Controller
                     'google_id' => $googleUser->id,
                     'google_token' => $googleUser->token,
                     'role' => 'member',
-                    'member_status' => 'pending', // Google users are pending until profile is completed
+                    'member_status' => 'active', // Langsung aktif
                     'password' => null, // No local password
-                    'email_verified_at' => now(), // Directly mark as verified
+                    'email_verified_at' => now(), // Langsung terverifikasi
                 ]);
 
                 // We might need to generate a register number here too
