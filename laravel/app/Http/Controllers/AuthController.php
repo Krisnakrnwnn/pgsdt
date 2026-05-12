@@ -113,6 +113,25 @@ class AuthController extends Controller
 
         Auth::login($user);
 
+        // Cek apakah ada agenda upcoming yang bisa diikuti
+        $upcomingAgenda = \App\Models\Agenda::where('status', 'upcoming')
+            ->where('registration_enabled', true)
+            ->where('event_date', '>=', now())
+            ->orderBy('event_date', 'asc')
+            ->first();
+
+        // Simpan informasi agenda ke session untuk ditampilkan di popup
+        if ($upcomingAgenda) {
+            $request->session()->put('show_agenda_popup', true);
+            $request->session()->put('agenda_for_popup', [
+                'id' => $upcomingAgenda->id,
+                'title' => $upcomingAgenda->title,
+                'slug' => $upcomingAgenda->slug,
+                'event_date' => $upcomingAgenda->event_date->isoFormat('D MMMM Y'),
+                'location' => $upcomingAgenda->location,
+            ]);
+        }
+
         return redirect('/')->with('success', 'Pendaftaran berhasil! Akun Anda telah otomatis aktif.');
     }
 

@@ -68,6 +68,100 @@
         overflow-x: hidden;
     }
 
+    /* Ukuran font lebih besar untuk mobile - untuk pengguna orang tua */
+    @media (max-width: 768px) {
+        body {
+            font-size: 18px;
+            line-height: 1.8;
+        }
+        
+        h1 {
+            font-size: 2rem !important;
+        }
+        
+        h2 {
+            font-size: 1.75rem !important;
+        }
+        
+        h3 {
+            font-size: 1.5rem !important;
+        }
+        
+        p, span, div, a, label, input, select, textarea, button {
+            font-size: 1.1rem !important;
+        }
+        
+        small {
+            font-size: 1rem !important;
+        }
+        
+        /* Button lebih besar dan mudah diklik */
+        button, .btn, a.btn, .btn-primary, .btn-outline {
+            min-height: 56px !important;
+            padding: 16px 24px !important;
+            font-size: 1.2rem !important;
+            font-weight: 700 !important;
+            border-width: 2px !important;
+        }
+        
+        /* Input form lebih besar */
+        input, select, textarea {
+            min-height: 56px !important;
+            padding: 16px !important;
+            font-size: 1.1rem !important;
+            border-width: 2px !important;
+        }
+        
+        /* Link lebih mudah diklik */
+        a {
+            padding: 8px 4px !important;
+            display: inline-block;
+        }
+        
+        /* Spacing lebih lega */
+        .section-container {
+            padding: 0 25px !important;
+        }
+        
+        /* Card lebih besar dan jelas */
+        .news-card, .event-card {
+            padding: 25px !important;
+            margin-bottom: 25px !important;
+        }
+        
+        /* Navigation lebih mudah diakses */
+        .nav-menu a {
+            padding: 18px 20px !important;
+            font-size: 1.2rem !important;
+        }
+        
+        /* Form label lebih jelas */
+        label {
+            font-size: 1.15rem !important;
+            font-weight: 700 !important;
+            margin-bottom: 12px !important;
+            display: block !important;
+        }
+        
+        /* Error messages lebih terlihat */
+        .error, .alert {
+            font-size: 1.1rem !important;
+            padding: 16px !important;
+            line-height: 1.6 !important;
+        }
+        
+        /* Contrast lebih tinggi untuk readability */
+        .text-dim {
+            color: #374151 !important;
+        }
+        
+        /* Icon lebih besar */
+        svg {
+            width: 24px !important;
+            height: 24px !important;
+        }
+    }
+
     h1, h2, h3 {
         font-family: 'Cinzel', serif;
         font-weight: 700;
@@ -90,6 +184,22 @@
         height: 85px;
         display: flex;
         align-items: center;
+    }
+    
+    /* Navbar lebih tinggi di mobile untuk kemudahan akses */
+    @media (max-width: 768px) {
+        .navbar {
+            height: 75px;
+        }
+        
+        .nav-brand {
+            font-size: 1.3rem !important;
+        }
+        
+        .brand-logo {
+            width: 50px !important;
+            height: 50px !important;
+        }
     }
 
     .nav-container {
@@ -3597,5 +3707,274 @@
         table.data-table .col-name > a > div:last-child {
             font-size: 0.7rem !important;
         }
+    }
+}
+
+
+/* =============================================
+   MOBILE UX IMPROVEMENTS FOR ELDERLY USERS
+   ============================================= */
+
+@media (max-width: 768px) {
+    /* Larger tap targets - minimum 48x48px for accessibility */
+    a, button, input[type="submit"], input[type="button"], select {
+        min-height: 48px;
+        min-width: 48px;
+    }
+    
+    /* Clearer focus states for better visibility */
+    a:focus, button:focus, input:focus, select:focus, textarea:focus {
+        outline: 3px solid var(--accent-gold) !important;
+        outline-offset: 2px !important;
+        box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.2) !important;
+    }
+    
+    /* Hover states juga untuk touch devices */
+    @media (hover: none) {
+        button:active, a:active {
+            background-color: var(--accent-gold-dark) !important;
+            transform: scale(0.98);
+        }
+    }
+    
+    /* Spacing antar elemen lebih lega */
+    .form-group, .input-group {
+        margin-bottom: 24px !important;
+    }
+    
+    /* Table lebih mudah dibaca */
+    table {
+        font-size: 1.1rem !important;
+    }
+    
+    table th, table td {
+        padding: 16px 12px !important;
+    }
+    
+    /* Alert/notification lebih prominent */
+    .alert, .notification, .flash-message {
+        font-size: 1.15rem !important;
+        padding: 20px !important;
+        border-width: 3px !important;
+    }
+    
+    /* Loading states lebih jelas */
+    button:disabled {
+        opacity: 0.6 !important;
+        cursor: not-allowed !important;
+    }
+    
+    /* Dropdown select lebih besar */
+    select {
+        background-size: 24px !important;
+        padding-right: 48px !important;
+    }
+    
+    /* Checkbox dan radio lebih besar */
+    input[type="checkbox"], input[type="radio"] {
+        width: 24px !important;
+        height: 24px !important;
+        margin-right: 12px !important;
+    }
+    
+    /* Breadcrumb dan navigation lebih jelas */
+    .breadcrumb, .pagination {
+        font-size: 1.1rem !important;
+    }
+    
+    .pagination a, .pagination button {
+        min-width: 48px !important;
+        min-height: 48px !important;
+        padding: 12px !important;
+    }
+    
+    /* Modal/popup lebih mudah dibaca */
+    .modal-content, .popup-content {
+        padding: 30px 25px !important;
+    }
+    
+    .modal-title, .popup-title {
+        font-size: 1.6rem !important;
+        margin-bottom: 20px !important;
+    }
+    
+    /* Card spacing lebih lega */
+    .card, .content-card {
+        padding: 25px 20px !important;
+        margin-bottom: 20px !important;
+    }
+    
+    /* Hero section lebih proporsional */
+    .hero {
+        min-height: 50vh !important;
+        padding: 40px 20px !important;
+    }
+    
+    .hero h1 {
+        font-size: 2rem !important;
+        line-height: 1.3 !important;
+        margin-bottom: 16px !important;
+    }
+    
+    .hero p {
+        font-size: 1.15rem !important;
+        line-height: 1.6 !important;
+    }
+    
+    /* Button group stacked dengan spacing */
+    .hero-btns, .btn-group, .action-btns {
+        flex-direction: column !important;
+        gap: 16px !important;
+        width: 100% !important;
+    }
+    
+    .hero-btns a, .hero-btns button,
+    .btn-group a, .btn-group button,
+    .action-btns a, .action-btns button {
+        width: 100% !important;
+        text-align: center !important;
+        justify-content: center !important;
+        padding: 18px 24px !important;
+        font-size: 1.2rem !important;
+    }
+    
+    /* Form validation messages lebih terlihat */
+    .error-message, .validation-error {
+        color: #dc2626 !important;
+        font-size: 1.05rem !important;
+        font-weight: 600 !important;
+        margin-top: 8px !important;
+        display: block !important;
+    }
+    
+    .success-message {
+        color: #16a34a !important;
+        font-size: 1.05rem !important;
+        font-weight: 600 !important;
+    }
+    
+    /* Image dengan caption lebih jelas */
+    figure figcaption {
+        font-size: 1rem !important;
+        padding: 12px !important;
+    }
+    
+    /* List items lebih spaced */
+    ul li, ol li {
+        margin-bottom: 12px !important;
+        line-height: 1.7 !important;
+    }
+    
+    /* Back button lebih prominent */
+    .back-link, .back-button {
+        font-size: 1.15rem !important;
+        padding: 12px 16px !important;
+        margin-bottom: 24px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 10px !important;
+    }
+    
+    /* Status badges lebih besar */
+    .badge, .tag, .status {
+        font-size: 1rem !important;
+        padding: 8px 16px !important;
+        font-weight: 700 !important;
+    }
+    
+    /* Tabs lebih mudah diklik */
+    .tabs button, .tab-item {
+        min-height: 52px !important;
+        padding: 14px 20px !important;
+        font-size: 1.15rem !important;
+    }
+    
+    /* Search input lebih prominent */
+    input[type="search"] {
+        font-size: 1.15rem !important;
+        padding: 16px 20px !important;
+        min-height: 56px !important;
+    }
+    
+    /* Footer links lebih mudah diklik */
+    footer a {
+        padding: 12px 8px !important;
+        font-size: 1.1rem !important;
+    }
+    
+    /* Reduce animation untuk menghindari distraction */
+    * {
+        animation-duration: 0.3s !important;
+        transition-duration: 0.2s !important;
+    }
+    
+    /* Scroll behavior smooth */
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    /* Prevent text selection issues */
+    button, a {
+        -webkit-tap-highlight-color: rgba(212, 175, 55, 0.3);
+        user-select: none;
+    }
+    
+    /* Better contrast for links */
+    a {
+        text-decoration: underline;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 4px;
+    }
+    
+    a:hover, a:focus {
+        text-decoration-thickness: 3px;
+    }
+    
+    /* Navigation menu items */
+    .nav-menu a {
+        padding: 20px 24px !important;
+        font-size: 1.25rem !important;
+        border-bottom: 2px solid rgba(255,255,255,0.1);
+    }
+    
+    /* Profile dropdown lebih accessible */
+    .profile-dropdown {
+        min-width: 280px !important;
+    }
+    
+    .profile-dropdown a {
+        padding: 16px 20px !important;
+        font-size: 1.15rem !important;
+    }
+}
+
+/* Extra improvements for very small screens */
+@media (max-width: 480px) {
+    body {
+        font-size: 19px !important;
+    }
+    
+    h1 {
+        font-size: 2.2rem !important;
+    }
+    
+    h2 {
+        font-size: 1.9rem !important;
+    }
+    
+    h3 {
+        font-size: 1.6rem !important;
+    }
+    
+    button, .btn, a.btn {
+        font-size: 1.25rem !important;
+        padding: 20px 28px !important;
+        min-height: 60px !important;
+    }
+    
+    input, select, textarea {
+        font-size: 1.2rem !important;
+        padding: 18px !important;
+        min-height: 60px !important;
     }
 }

@@ -143,6 +143,9 @@ Route::get('/events/{slug}', [AgendaController::class, 'show'])->name('events.sh
 Route::get('/events/{slug}/register', [AgendaRegistrationController::class, 'create'])->name('events.register')->middleware(['auth']);
 Route::post('/events/{slug}/register', [AgendaRegistrationController::class, 'store'])->name('events.register.store')->middleware(['auth']);
 
+// Agenda popup registration after user registration
+Route::post('/api/agenda/register-popup', [\App\Http\Controllers\AgendaPopupController::class, 'registerFromPopup'])->name('agenda.popup.register')->middleware(['auth']);
+
 Route::get('/heritage', function () {
     return view('pages.heritage');
 });
