@@ -11,129 +11,36 @@
     </div>
   </section>
 
-  <section style="padding: 60px 0; background: var(--section-bg);">
-    <div style="max-width: 700px; margin: 0 auto; padding: 0 20px;">
-        <!-- Registration Form -->
-        <div class="member-form-container" data-aos="fade-up">
-          <h3 style="font-family: 'Cinzel', serif; color: white; margin-bottom: 35px; font-size: clamp(1.3rem, 4vw, 1.8rem); text-align: center; border-bottom: 1px solid rgba(212,175,55,0.2); padding-bottom: 20px;">Formulir Registrasi</h3>
-          
-          @if ($errors->any())
-              <div style="background: rgba(255,0,0,0.1); border: 1px solid rgba(255,0,0,0.3); color: #ff8a80; padding: 15px; border-radius: 0; margin-bottom: 25px; font-size: 0.9rem;">
-                  <ul style="margin: 0; padding-left: 20px;">
-                      @foreach ($errors->all() as $error)
-                          <li>{{ $error }}</li>
-                      @endforeach
-                  </ul>
-              </div>
-          @endif
+  <section style="padding: 100px 0; background: var(--section-bg); min-height: 60vh; display: flex; align-items: center;">
+    <div style="max-width: 600px; margin: 0 auto; padding: 0 20px; width: 100%;">
+        <div class="member-form-container" data-aos="fade-up" style="background: white; border: 1px solid rgba(212,175,55,0.2); padding: 50px; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.05); text-align: center;">
+          <img src="{{ asset('assets/Logo.png') }}" alt="Dalem Tarukan" style="height: 80px; margin: 0 auto 30px; display: block;">
+          <h2 style="font-family: 'Cinzel', serif; color: var(--primary-dark); margin-bottom: 20px; font-size: 2rem;">Gabung Jadi Krama</h2>
+          <p style="color: #666; font-size: 1.1rem; line-height: 1.6; margin-bottom: 40px;">
+            Pendaftaran anggota baru PGSDT sekarang lebih mudah dan aman menggunakan akun <strong style="color: var(--primary-dark);">Google / Gmail</strong> Anda.
+          </p>
 
-          <form method="POST" action="{{ url('/register') }}">
-            @csrf
-            <div style="margin-bottom: 20px;">
-              <label style="display: block; color: rgba(255,255,255,0.7); font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Nama Lengkap *</label>
-              <input type="text" name="name" value="{{ old('name') }}" required
-                     style="width: 100%; padding: 14px 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0; color: white; font-family: 'Cinzel', serif; font-size: 0.95rem; outline: none; transition: border-color 0.3s;"
-                     placeholder="Nama Lengkap Anda"
-                     onfocus="this.style.borderColor='rgba(212,175,55,0.5)'"
-                     onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
-            </div>
+          <a href="{{ route('auth.google') }}" style="width: 100%; padding: 20px; border-radius: 12px; border: none; background: var(--primary-dark); color: white; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 1.1rem; font-weight: 700; font-family: 'Cinzel', serif; transition: all 0.3s; box-sizing: border-box; text-transform: uppercase; letter-spacing: 1.5px; box-shadow: 0 10px 20px rgba(10,31,28,0.2);" 
+             onmouseover="this.style.background='var(--accent-gold)'; this.style.color='var(--primary-dark)'; this.style.transform='translateY(-2px)'" 
+             onmouseout="this.style.background='var(--primary-dark)'; this.style.color='white'; this.style.transform='translateY(0)'">
+              <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" style="width: 24px; margin-right: 15px; filter: brightness(0) invert(1);" id="google-icon">
+              Daftar Sekarang
+          </a>
 
-            <div style="margin-bottom: 20px;">
-              <label style="display: block; color: rgba(255,255,255,0.7); font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Email *</label>
-              <input type="email" name="email" value="{{ old('email') }}" required
-                     style="width: 100%; padding: 14px 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0; color: white; font-family: 'Cinzel', serif; font-size: 0.95rem; outline: none; transition: border-color 0.3s;"
-                     placeholder="email@contoh.com"
-                     onfocus="this.style.borderColor='rgba(212,175,55,0.5)'"
-                     onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
-            </div>
-
-            <div class="member-form-grid">
-              <div>
-                <label style="display: block; color: rgba(255,255,255,0.7); font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">NIK *</label>
-                <input type="text" name="nik" id="nik-input" value="{{ old('nik') }}" required maxlength="16" pattern="[0-9]{16}" inputmode="numeric"
-                       style="width: 100%; padding: 14px 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0; color: white; font-family: 'Cinzel', serif; font-size: 0.95rem; outline: none; transition: border-color 0.3s;"
-                       placeholder="16 digit NIK"
-                       oninput="this.value=this.value.replace(/[^0-9]/g,''); validateNIK(this);"
-                       onfocus="this.style.borderColor='rgba(212,175,55,0.5)'"
-                       onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
-                <small id="nik-hint" style="display: block; margin-top: 5px; font-size: 0.75rem; color: rgba(255,255,255,0.4);">Masukkan 16 digit angka sesuai KTP</small>
-              </div>
-              <div>
-                <label style="display: block; color: rgba(255,255,255,0.7); font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">No. Telepon *</label>
-                <input type="text" name="phone" value="{{ old('phone') }}" required
-                       style="width: 100%; padding: 14px 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0; color: white; font-family: 'Cinzel', serif; font-size: 0.95rem; outline: none; transition: border-color 0.3s;"
-                       placeholder="08xxxxxxxxxx"
-                       onfocus="this.style.borderColor='rgba(212,175,55,0.5)'"
-                       onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
-              </div>
-            </div>
-
-            <div class="member-location-grid">
-              <div>
-                <label style="display: block; color: rgba(255,255,255,0.7); font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Kabupaten/Kota *</label>
-                <select name="kabupaten" id="kabupaten" required
-                       style="width: 100%; padding: 14px 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0; color: white; font-family: 'Cinzel', serif; font-size: 0.95rem; outline: none; transition: border-color 0.3s; appearance: none;">
-                    <option value="" style="color: black;">Pilih Kabupaten</option>
-                </select>
-              </div>
-              <div>
-                <label style="display: block; color: rgba(255,255,255,0.7); font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Kecamatan *</label>
-                <select name="kecamatan" id="kecamatan" required disabled
-                       style="width: 100%; padding: 14px 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0; color: white; font-family: 'Cinzel', serif; font-size: 0.95rem; outline: none; transition: border-color 0.3s; appearance: none;">
-                    <option value="" style="color: black;">Pilih Kecamatan</option>
-                </select>
-              </div>
-              <div>
-                <label style="display: block; color: rgba(255,255,255,0.7); font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Desa/Kelurahan *</label>
-                <select name="desa" id="desa" required disabled
-                       style="width: 100%; padding: 14px 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0; color: white; font-family: 'Cinzel', serif; font-size: 0.95rem; outline: none; transition: border-color 0.3s; appearance: none;">
-                    <option value="" style="color: black;">Pilih Desa</option>
-                </select>
-              </div>
-            </div>
-
-            <div style="margin-bottom: 20px;">
-              <label style="display: block; color: rgba(255,255,255,0.7); font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Kata Sandi *</label>
-              <input type="password" name="password" required
-                     style="width: 100%; padding: 14px 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0; color: white; font-family: 'Cinzel', serif; font-size: 0.95rem; outline: none; transition: border-color 0.3s;"
-                     placeholder="Minimal 8 karakter"
-                     onfocus="this.style.borderColor='rgba(212,175,55,0.5)'"
-                     onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
-            </div>
-
-            <div style="margin-bottom: 35px;">
-              <label style="display: block; color: rgba(255,255,255,0.7); font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Konfirmasi Kata Sandi *</label>
-              <input type="password" name="password_confirmation" required
-                     style="width: 100%; padding: 14px 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0; color: white; font-family: 'Cinzel', serif; font-size: 0.95rem; outline: none; transition: border-color 0.3s;"
-                     placeholder="Ulangi kata sandi"
-                     onfocus="this.style.borderColor='rgba(212,175,55,0.5)'"
-                     onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
-            </div>
-
-            <button type="submit" class="btn-primary" style="width: 100%; padding: 18px; border-radius: 0; border: none; cursor: pointer; font-size: 1rem; letter-spacing: 3px;">
-                DAFTAR SEKARANG
-            </button>
-
-            <div style="margin: 25px 0; display: flex; align-items: center; justify-content: center;">
-                <div style="flex: 1; height: 1px; background: rgba(255,255,255,0.1);"></div>
-                <span style="margin: 0 15px; color: rgba(255,255,255,0.3); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px;">Atau</span>
-                <div style="flex: 1; height: 1px; background: rgba(255,255,255,0.1);"></div>
-            </div>
-
-            <a href="{{ route('auth.google') }}" style="width: 100%; padding: 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 0.9rem; font-family: 'Inter', sans-serif; transition: all 0.3s; box-sizing: border-box;" 
-               onmouseover="this.style.background='rgba(255,255,255,0.1)'; this.style.borderColor='rgba(212,175,55,0.5)'" 
-               onmouseout="this.style.background='rgba(255,255,255,0.05)'; this.style.borderColor='rgba(255,255,255,0.1)'">
-                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" style="width: 18px; margin-right: 12px;">
-                DAFTAR DENGAN GOOGLE
-            </a>
-          </form>
-
-          <div style="text-align: center; margin-top: 30px; font-size: 0.9rem; color: #888;">
-              Sudah memiliki akun? <a href="{{ url('/login') }}" style="color: var(--accent-gold); font-weight: 700; text-decoration: none; border-bottom: 1px solid var(--accent-gold); text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem;">Masuk di sini</a>
+          <div style="margin-top: 40px; padding-top: 30px; border-top: 1px solid #eee;">
+            <p style="color: #888; font-size: 0.9rem; margin-bottom: 10px;">Sudah pernah mendaftar?</p>
+            <a href="{{ url('/login') }}" style="color: var(--accent-gold); font-weight: 700; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem;">Masuk di sini</a>
           </div>
         </div>
     </div>
   </section>
+
+  <script>
+    const btn = document.querySelector('a[href="{{ route("auth.google") }}"]');
+    const icon = document.getElementById('google-icon');
+    btn.addEventListener('mouseover', () => icon.style.filter = 'none');
+    btn.addEventListener('mouseout', () => icon.style.filter = 'brightness(0) invert(1)');
+  </script>
 @endsection
 
 @section('scripts')

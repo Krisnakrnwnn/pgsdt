@@ -17,122 +17,12 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->validate([
-            'email'    => ['required', 'email', 'max:255'],
-            'password' => ['required', 'string', 'min:1', 'max:255'],
-        ]);
-
-        // Cek apakah user ada dan tidak di-soft-delete
-        $user = \App\Models\User::where('email', $request->email)->first();
-        if (!$user) {
-            return back()->withErrors([
-                'email' => 'Kredensial yang diberikan tidak cocok dengan data kami.',
-            ])->onlyInput('email');
-        }
-
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-
-            $user = Auth::user();
-            if (!$user->hasVerifiedEmail()) {
-                $user->markEmailAsVerified();
-                $user->member_status = 'active';
-                $user->save();
-            }
-
-            if (Auth::user()->role === 'admin') {
-                return redirect()->intended('admin');
-            }
-
-            return redirect()->intended('/');
-        }
-
-        return back()->withErrors([
-            'email' => 'Kredensial yang diberikan tidak cocok dengan data kami.',
-        ])->onlyInput('email');
+        return redirect('/login')->withErrors(['email' => 'Login manual telah dinonaktifkan. Silakan gunakan Google Login.']);
     }
 
     public function register(Request $request)
     {
-        $request->validate([
-            'nik' => ['required', 'string', 'size:16', 'regex:/^[0-9]{16}$/', \Illuminate\Validation\Rule::unique('users', 'nik')->withoutTrashed()],
-            'name' => 'required|string|max:255',
-            'email' => ['required', 'string', 'email', 'max:255', \Illuminate\Validation\Rule::unique('users', 'email')->withoutTrashed()],
-            'password' => 'required|string|min:8|confirmed',
-            'phone' => 'required|string|max:20',
-            'kabupaten' => 'required|string',
-            'kecamatan' => 'required|string',
-            'desa' => 'required|string',
-        ]);
-        
-        // Jika ada user yang sudah di-soft-delete dengan email atau NIK yang sama, 
-        // hapus permanen agar bisa mendaftar ulang (menghindari error unique constraint di DB)
-        User::withTrashed()
-            ->where(function($query) use ($request) {
-                $query->where('email', $request->email)
-                      ->orWhere('nik', $request->nik);
-            })
-            ->whereNotNull('deleted_at')
-            ->forceDelete();
-
-        // Generate register number yang unik — pakai loop untuk hindari collision
-        do {
-            $registerNumber = 'PGSDT-' . date('Ym') . str_pad(random_int(1, 99999), 5, '0', STR_PAD_LEFT);
-        } while (\App\Models\User::withTrashed()->where('register_number', $registerNumber)->exists());
-
-        $user = \App\Models\User::create([
-            'nik' => $request->nik,
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => \Illuminate\Support\Facades\Hash::make($request->password),
-            'role' => 'member',
-            'phone' => $request->phone,
-            'kabupaten' => $request->kabupaten,
-            'kecamatan' => $request->kecamatan,
-            'desa' => $request->desa,
-            'register_number' => $registerNumber,
-            'member_status' => 'pending',
-        ]);
-
-        // Langsung tandai sebagai terverifikasi dan aktif
-        $user->markEmailAsVerified();
-        $user->member_status = 'active';
-        $user->save();
-
-        // Kirim notifikasi selamat datang (Opsional, tapi bagus untuk user)
-        $user->notify(new \App\Notifications\MemberVerifiedNotification('approved'));
-
-        // Tetap trigger event Registered jika ingin kirim email welcome (bukan link verifikasi)
-        // event(new \Illuminate\Auth\Events\Registered($user));
-
-        // Kirim notifikasi ke semua admin
-        $admins = User::where('role', 'admin')->get();
-        foreach ($admins as $admin) {
-            $admin->notify(new \App\Notifications\MemberRegisteredNotification($user));
-        }
-
-        Auth::login($user);
-
-        // Cek apakah ada agenda upcoming yang bisa diikuti
-        $upcomingAgenda = \App\Models\Agenda::where('status', 'upcoming')
-            ->where('registration_enabled', true)
-            ->where('event_date', '>=', now())
-            ->orderBy('event_date', 'asc')
-            ->first();
-
-        // Simpan informasi agenda ke session untuk ditampilkan di popup
-        if ($upcomingAgenda) {
-            $request->session()->put('show_agenda_popup', true);
-            $request->session()->put('agenda_for_popup', [
-                'id' => $upcomingAgenda->id,
-                'title' => $upcomingAgenda->title,
-                'slug' => $upcomingAgenda->slug,
-                'event_date' => $upcomingAgenda->event_date->isoFormat('D MMMM Y'),
-                'location' => $upcomingAgenda->location,
-            ]);
-        }
-
-        return redirect('/')->with('success', 'Pendaftaran berhasil! Akun Anda telah otomatis aktif.');
+        return redirect('/member')->withErrors(['email' => 'Pendaftaran manual telah dinonaktifkan. Silakan daftar menggunakan Google Login.']);
     }
 
     public function logout(Request $request)

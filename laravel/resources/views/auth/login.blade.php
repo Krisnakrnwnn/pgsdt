@@ -26,73 +26,26 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ url('/login') }}">
-            @csrf
-            
-            <div style="margin-bottom: 24px;">
-                <label style="display: block; color: rgba(255,255,255,0.7); font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; font-family: 'Cinzel', serif;">Email Terdaftar</label>
-                <div style="position: relative;">
-                    <span style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: rgba(212,175,55,0.7);">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                        </svg>
-                    </span>
-                    <input type="email" name="email" value="{{ old('email') }}" 
-                           style="width: 100%; padding: 14px 16px 14px 48px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: white; font-family: 'Inter', sans-serif; font-size: 0.95rem; outline: none; box-sizing: border-box; transition: border-color 0.3s;"
-                           placeholder="nama@email.com" required autofocus
-                           onfocus="this.style.borderColor='rgba(212,175,55,0.5)'"
-                           onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
-                </div>
-            </div>
-            
-            <div style="margin-bottom: 32px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                    <label style="display: block; color: rgba(255,255,255,0.7); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-family: 'Cinzel', serif;">Kata Sandi</label>
-                    <a href="{{ route('password.request') }}" style="color: var(--accent-gold); font-size: 0.75rem; text-decoration: none; opacity: 0.8; transition: opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'">Lupa Sandi?</a>
-                </div>
-                <div style="position: relative;">
-                    <span style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: rgba(212,175,55,0.7);">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                        </svg>
-                    </span>
-                    <input type="password" name="password" id="password"
-                           style="width: 100%; padding: 14px 48px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: white; font-family: 'Inter', sans-serif; font-size: 0.95rem; outline: none; box-sizing: border-box; transition: border-color 0.3s;"
-                           placeholder="••••••••" required
-                           onfocus="this.style.borderColor='rgba(212,175,55,0.5)'"
-                           onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
-                    <button type="button" onclick="togglePassword()" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: transparent; border: none; color: rgba(255,255,255,0.4); cursor: pointer;">
-                        <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-            
-            <button type="submit" class="btn-primary" style="width: 100%; padding: 16px; border-radius: 12px; border: none; cursor: pointer; font-size: 1rem; letter-spacing: 2px;">
-                MASUK SEKARANG
-            </button>
-            
-            <div style="margin: 20px 0; display: flex; align-items: center; justify-content: center;">
-                <div style="flex: 1; height: 1px; background: rgba(255,255,255,0.1);"></div>
-                <span style="margin: 0 15px; color: rgba(255,255,255,0.3); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px;">atau</span>
-                <div style="flex: 1; height: 1px; background: rgba(255,255,255,0.1);"></div>
-            </div>
+        <div style="text-align: center;">
+            <p style="color: rgba(255,255,255,0.7); font-size: 1.1rem; line-height: 1.6; margin-bottom: 35px; font-family: 'Inter', sans-serif;">
+                Untuk keamanan dan kemudahan krama, akses portal sekarang menggunakan akun <strong style="color: white;">Gmail / Google</strong>.
+            </p>
 
-            <a href="{{ route('auth.google') }}" style="width: 100%; padding: 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); color: white; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 0.9rem; font-family: 'Inter', sans-serif; transition: all 0.3s; box-sizing: border-box;" 
-               onmouseover="this.style.background='rgba(255,255,255,0.1)'; this.style.borderColor='rgba(212,175,55,0.5)'" 
-               onmouseout="this.style.background='rgba(255,255,255,0.05)'; this.style.borderColor='rgba(255,255,255,0.2)'">
-                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" style="width: 18px; margin-right: 12px;">
+            <a href="{{ route('auth.google') }}" style="width: 100%; padding: 20px; border-radius: 16px; border: 2px solid var(--accent-gold); background: rgba(212,175,55,0.1); color: white; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 1.1rem; font-weight: 700; font-family: 'Cinzel', serif; transition: all 0.3s; box-sizing: border-box; text-transform: uppercase; letter-spacing: 1px;" 
+               onmouseover="this.style.background='var(--accent-gold)'; this.style.color='var(--primary-dark)'" 
+               onmouseout="this.style.background='rgba(212,175,55,0.1)'; this.style.color='white'">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" style="width: 24px; margin-right: 15px;">
                 Masuk dengan Google
             </a>
-        </form>
-        
-        <div style="text-align: center; margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px;">
-            <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem; font-family: 'Cinzel', serif;">Belum bergabung menjadi krama?</p>
-            <a href="{{ url('/member') }}" style="color: var(--accent-gold); font-weight: 700; text-decoration: none; font-size: 0.95rem; display: inline-block; margin-top: 4px; font-family: 'Cinzel', serif;">
-                Daftar
-            </a>
+
+            <div style="margin-top: 40px; padding: 20px; background: rgba(212,175,55,0.05); border-radius: 12px; border: 1px dashed rgba(212,175,55,0.3);">
+                <p style="color: var(--accent-gold-light); font-size: 0.85rem; margin: 0; line-height: 1.5;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display: inline; margin-bottom: -3px; margin-right: 5px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Pendaftaran anggota baru juga dilakukan melalui tombol di atas.
+                </p>
+            </div>
         </div>
     </div>
 </div>
