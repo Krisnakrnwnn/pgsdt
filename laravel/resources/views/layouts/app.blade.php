@@ -316,16 +316,12 @@
   @if($showPopup && $agendaData && is_array($agendaData))
   <!-- AGENDA POPUP MODAL (Global) -->
   <div id="agenda-popup-modal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 10001; display: flex; align-items: center; justify-content: center; padding: 20px;">
-    <div style="background: var(--primary-dark); max-width: 600px; width: 100%; border-radius: 0px; overflow: hidden; box-shadow: 0 25px 60px rgba(0,0,0,0.5); border: 2px solid var(--accent-gold); animation: slideUpPopup 0.4s ease;">
-      <div style="background: linear-gradient(135deg, var(--accent-gold), #b8941f); padding: 30px; text-align: center;">
-        <div style="font-size: 3rem; margin-bottom: 10px;">🎉</div>
-        <h2 style="color: var(--primary-dark); font-size: 1.8rem; margin: 0; font-weight: 800; font-family: 'Cinzel', serif;">Selamat Datang!</h2>
-        <p style="color: var(--primary-dark); margin: 10px 0 0 0; font-size: 1rem; opacity: 0.9;">Pendaftaran Anda berhasil</p>
-      </div>
+    <div style="background: var(--primary-dark); max-width: 500px; width: 100%; border-radius: 0px; overflow: hidden; box-shadow: 0 25px 60px rgba(0,0,0,0.5); border: 1px solid var(--accent-gold); animation: slideUpPopup 0.4s ease;">
       
-      <div style="padding: 35px 30px;">
-        <p style="color: var(--text-light); font-size: 1.15rem; line-height: 1.8; margin-bottom: 25px; text-align: center;">
-          Saat ini ada agenda kegiatan yang akan datang. Apakah Anda ingin mengikuti agenda ini?
+      <div style="padding: 30px;">
+        <h2 style="color: var(--accent-gold); font-size: 1.5rem; margin: 0 0 15px 0; text-align: center; font-family: 'Cinzel', serif; font-weight: 700;">Agenda Mendatang</h2>
+        <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6; margin-bottom: 25px; text-align: center;">
+          Apakah Anda ingin mengikuti agenda ini?
         </p>
         
         <div style="background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); padding: 25px; margin-bottom: 30px; border-radius: 0px;">
