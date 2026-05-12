@@ -14,7 +14,7 @@
   <section style="padding: 60px 0; background: var(--section-bg);">
     <div style="max-width: 700px; margin: 0 auto; padding: 0 20px;">
         <!-- Registration Form -->
-        <div class="member-form-container" data-aos="fade-up">
+        <div class="member-form-container" data-aos="fade-up" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(212,175,55,0.2); padding: 40px; border-radius: 4px;">
           <h3 style="font-family: 'Cinzel', serif; color: white; margin-bottom: 35px; font-size: clamp(1.3rem, 4vw, 1.8rem); text-align: center; border-bottom: 1px solid rgba(212,175,55,0.2); padding-bottom: 20px;">Formulir Registrasi</h3>
           
           @if ($errors->any())
@@ -47,7 +47,7 @@
                      onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
             </div>
 
-            <div class="member-form-grid">
+            <div class="member-form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
               <div>
                 <label style="display: block; color: rgba(255,255,255,0.7); font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">NIK *</label>
                 <input type="text" name="nik" id="nik-input" value="{{ old('nik') }}" required maxlength="16" pattern="[0-9]{16}" inputmode="numeric"
@@ -68,7 +68,7 @@
               </div>
             </div>
 
-            <div class="member-location-grid">
+            <div class="member-location-grid" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 20px;">
               <div>
                 <label style="display: block; color: rgba(255,255,255,0.7); font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Kabupaten/Kota *</label>
                 <select name="kabupaten" id="kabupaten" required

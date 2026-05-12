@@ -115,52 +115,59 @@
   <!-- AGENDA POPUP MODAL -->
   @if(session('show_agenda_popup') && session('agenda_for_popup'))
   <div id="agenda-popup-modal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px;">
-    <div style="background: var(--primary-dark); max-width: 600px; width: 100%; border-radius: 0px; overflow: hidden; box-shadow: 0 25px 60px rgba(0,0,0,0.5); border: 2px solid var(--accent-gold); animation: slideUp 0.4s ease;">
+    <div style="background: var(--primary-dark); max-width: 580px; width: 100%; overflow: hidden; box-shadow: 0 25px 60px rgba(0,0,0,0.5); border: 2px solid var(--accent-gold); animation: slideUp 0.4s ease;">
       <!-- Header -->
-      <div style="background: linear-gradient(135deg, var(--accent-gold), #b8941f); padding: 30px; text-align: center;">
-        <div style="font-size: 3rem; margin-bottom: 10px;">🎉</div>
-        <h2 style="color: var(--primary-dark); font-size: 1.8rem; margin: 0; font-weight: 800;">Selamat Datang!</h2>
-        <p style="color: var(--primary-dark); margin: 10px 0 0 0; font-size: 1rem; opacity: 0.9;">Pendaftaran Anda berhasil</p>
+      <div style="background: linear-gradient(135deg, var(--accent-gold), #b8941f); padding: 28px 30px; text-align: center;">
+        <div class="popup-emoji" style="font-size: 3rem; margin-bottom: 10px;">🎉</div>
+        <h2 style="color: var(--primary-dark); font-size: 1.8rem; margin: 0; font-weight: 800; font-family: 'Cinzel', serif;">Selamat Bergabung!</h2>
+        <p style="color: var(--primary-dark); margin: 8px 0 0 0; font-size: 1rem; opacity: 0.85; font-family: 'Inter', sans-serif;">Pendaftaran Anda berhasil dikonfirmasi</p>
       </div>
       
       <!-- Body -->
-      <div style="padding: 35px 30px;">
-        <p style="color: var(--text-light); font-size: 1.15rem; line-height: 1.8; margin-bottom: 25px; text-align: center;">
-          Saat ini ada agenda kegiatan yang akan datang. Apakah Anda ingin mengikuti agenda ini?
+      <div style="padding: 28px 30px 30px;">
+        <p style="color: var(--text-light); font-size: 1.1rem; line-height: 1.75; margin-bottom: 22px; text-align: center; font-family: 'Inter', sans-serif;">
+          Saat ini ada <strong style="color: var(--accent-gold);">kegiatan agenda</strong> yang akan segera berlangsung.<br>
+          Apakah Anda ingin ikut serta dalam kegiatan ini?
         </p>
         
         <!-- Agenda Info Card -->
-        <div style="background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); padding: 25px; margin-bottom: 30px; border-radius: 0px;">
-          <h3 style="color: var(--accent-gold); font-size: 1.4rem; margin: 0 0 15px 0; font-weight: 700;">{{ session('agenda_for_popup')['title'] }}</h3>
-          <div style="display: flex; flex-direction: column; gap: 12px; color: var(--accent-gold-light); font-size: 1.05rem;">
+        <div class="agenda-info-card" style="background: rgba(212, 175, 55, 0.1); border: 2px solid rgba(212, 175, 55, 0.4); padding: 22px; margin-bottom: 24px;">
+          <h3 style="color: var(--accent-gold); font-size: 1.3rem; margin: 0 0 14px 0; font-weight: 700; font-family: 'Cinzel', serif; line-height: 1.3;">{{ session('agenda_for_popup')['title'] }}</h3>
+          <div style="display: flex; flex-direction: column; gap: 10px; color: var(--accent-gold-light);">
             <div style="display: flex; align-items: center; gap: 10px;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="flex-shrink:0;">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
-              <span>{{ session('agenda_for_popup')['event_date'] }}</span>
+              <span style="font-family: 'Inter', sans-serif; font-size: 1rem;">{{ session('agenda_for_popup')['event_date'] }}</span>
             </div>
             <div style="display: flex; align-items: center; gap: 10px;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="flex-shrink:0;">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
-              <span>{{ session('agenda_for_popup')['location'] ?? 'Lokasi segera diumumkan' }}</span>
+              <span style="font-family: 'Inter', sans-serif; font-size: 1rem;">{{ session('agenda_for_popup')['location'] ?? 'Lokasi segera diumumkan' }}</span>
             </div>
           </div>
         </div>
         
         <!-- Action Buttons -->
-        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-          <button onclick="registerAgenda()" id="btn-register-agenda" style="flex: 1; min-width: 200px; background: var(--accent-gold); color: var(--primary-dark); border: none; padding: 18px 24px; font-size: 1.15rem; font-weight: 800; cursor: pointer; transition: all 0.3s; font-family: 'Cinzel', serif; border-radius: 0px; text-transform: uppercase; letter-spacing: 1px;">
-            YA, SAYA IKUT
+        <div class="popup-actions" style="display: flex; gap: 12px; flex-direction: column;">
+          <button onclick="registerAgenda()" id="btn-register-agenda" class="btn-ya" style="width: 100%; background: var(--accent-gold); color: var(--primary-dark); border: none; padding: 18px 24px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.3s; font-family: 'Cinzel', serif; text-transform: uppercase; letter-spacing: 1.5px; min-height: 60px; display: flex; align-items: center; justify-content: center; gap: 10px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+            YA, SAYA INGIN IKUT
           </button>
-          <button onclick="closeAgendaPopup()" style="flex: 1; min-width: 200px; background: transparent; color: var(--text-light); border: 2px solid rgba(255,255,255,0.3); padding: 18px 24px; font-size: 1.15rem; font-weight: 700; cursor: pointer; transition: all 0.3s; font-family: 'Cinzel', serif; border-radius: 0px; text-transform: uppercase; letter-spacing: 1px;">
+          <button onclick="closeAgendaPopup()" class="btn-tidak" style="width: 100%; background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.75); border: 2px solid rgba(255,255,255,0.25); padding: 16px 24px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s; font-family: 'Cinzel', serif; text-transform: uppercase; letter-spacing: 1px; min-height: 56px; display: flex; align-items: center; justify-content: center; gap: 10px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
             TIDAK, TERIMA KASIH
           </button>
         </div>
         
-        <p style="color: rgba(255,255,255,0.5); font-size: 0.95rem; text-align: center; margin-top: 20px; line-height: 1.6;">
-          Anda dapat melihat detail agenda dan mendaftar nanti melalui menu Agenda
+        <p class="popup-note" style="color: rgba(255,255,255,0.45); font-size: 0.9rem; text-align: center; margin-top: 18px; line-height: 1.6; font-family: 'Inter', sans-serif;">
+          Anda dapat mendaftar agenda ini nanti melalui menu <strong style="color: rgba(255,255,255,0.65);">Agenda</strong>
         </p>
       </div>
     </div>
@@ -168,57 +175,26 @@
 
   <style>
     @keyframes slideUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
     
-    #agenda-popup-modal button:hover {
+    #agenda-popup-modal .btn-ya:hover {
+      filter: brightness(1.1);
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      box-shadow: 0 8px 24px rgba(212,175,55,0.4);
     }
     
-    #agenda-popup-modal button:active {
-      transform: translateY(0);
+    #agenda-popup-modal .btn-tidak:hover {
+      background: rgba(255,255,255,0.12) !important;
+      border-color: rgba(255,255,255,0.5) !important;
+      color: white !important;
     }
-    
-    /* Mobile responsive untuk popup */
-    @media (max-width: 768px) {
-      #agenda-popup-modal > div {
-        max-width: 95%;
-        margin: 0 10px;
-      }
-      
-      #agenda-popup-modal h2 {
-        font-size: 1.5rem !important;
-      }
-      
-      #agenda-popup-modal h3 {
-        font-size: 1.2rem !important;
-      }
-      
-      #agenda-popup-modal p {
-        font-size: 1.1rem !important;
-      }
-      
-      #agenda-popup-modal button {
-        font-size: 1.1rem !important;
-        padding: 16px 20px !important;
-        min-width: 100% !important;
-      }
-      
-      #agenda-popup-modal > div > div:last-child {
-        padding: 25px 20px !important;
-      }
-      
-      #agenda-popup-modal > div > div:last-child > div:first-child {
-        flex-direction: column !important;
-      }
+
+    /* Spin animation untuk loading */
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
     }
   </style>
 
@@ -234,11 +210,11 @@
     
     function registerAgenda() {
       const btn = document.getElementById('btn-register-agenda');
-      const originalText = btn.innerHTML;
       
       // Disable button dan tampilkan loading
       btn.disabled = true;
-      btn.innerHTML = '<span style="display:inline-flex;align-items:center;gap:8px;"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin 1s linear infinite;"><path d="M21 12a9 9 0 11-6.219-8.56"/></svg>Memproses...</span>';
+      btn.style.opacity = '0.8';
+      btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin 1s linear infinite;"><path d="M21 12a9 9 0 11-6.219-8.56"/></svg>&nbsp; Sedang Mendaftar...';
       
       // Kirim request ke server
       fetch('{{ route("agenda.popup.register") }}', {
@@ -255,41 +231,34 @@
       .then(data => {
         if (data.success) {
           // Tampilkan pesan sukses
-          btn.innerHTML = '✓ BERHASIL TERDAFTAR';
-          btn.style.background = '#4caf50';
+          btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>&nbsp; ✓ BERHASIL TERDAFTAR!';
+          btn.style.background = '#27ae60';
+          btn.style.color = 'white';
+          btn.style.opacity = '1';
           
           setTimeout(() => {
             closeAgendaPopup();
-            // Redirect ke halaman agenda atau reload
             window.location.href = '{{ route("events.show", session("agenda_for_popup")["slug"]) }}';
-          }, 1500);
+          }, 1800);
         } else {
           alert(data.message || 'Terjadi kesalahan. Silakan coba lagi.');
           btn.disabled = false;
-          btn.innerHTML = originalText;
+          btn.style.opacity = '1';
+          btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg> YA, SAYA INGIN IKUT';
         }
       })
       .catch(error => {
         console.error('Error:', error);
         alert('Terjadi kesalahan. Silakan coba lagi.');
         btn.disabled = false;
-        btn.innerHTML = originalText;
+        btn.style.opacity = '1';
+        btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg> YA, SAYA INGIN IKUT';
       });
     }
     
-    // Prevent closing on backdrop click untuk memastikan user membuat pilihan
-    document.getElementById('agenda-popup-modal')?.addEventListener('click', function(e) {
-      if (e.target === this) {
-        // Optional: bisa diaktifkan jika ingin bisa close dengan klik backdrop
-        // closeAgendaPopup();
-      }
-    });
-    
     // Close on ESC key
     document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        closeAgendaPopup();
-      }
+      if (e.key === 'Escape') closeAgendaPopup();
     });
   </script>
   @endif
