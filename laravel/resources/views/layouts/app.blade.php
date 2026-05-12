@@ -307,6 +307,7 @@
   
   @vite(['resources/js/app.js'])
   <!-- AGENDA POPUP MODAL (Global) -->
+  @auth
   @if(session('show_agenda_popup') && session('agenda_for_popup'))
   <div id="agenda-popup-modal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 10001; display: flex; align-items: center; justify-content: center; padding: 20px;">
     <div style="background: var(--primary-dark); max-width: 600px; width: 100%; border-radius: 0px; overflow: hidden; box-shadow: 0 25px 60px rgba(0,0,0,0.5); border: 2px solid var(--accent-gold); animation: slideUpPopup 0.4s ease;">
@@ -425,6 +426,7 @@
     });
   </script>
   @endif
+  @endauth
 
   @yield('scripts')
 </body>
