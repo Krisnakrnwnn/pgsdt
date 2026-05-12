@@ -68,73 +68,97 @@
         overflow-x: hidden;
     }
 
-    /* ============================================================
-       MOBILE UX - Dioptimalkan untuk pengguna orang tua
-       Semua elemen harus mudah dibaca dan mudah diklik
-       ============================================================ */
+    /* Ukuran font lebih besar untuk mobile - untuk pengguna orang tua */
     @media (max-width: 768px) {
         body {
-            font-size: 17px;
+            font-size: 18px;
             line-height: 1.8;
         }
         
         h1 {
-            font-size: 1.9rem !important;
+            font-size: 2rem !important;
         }
         
         h2 {
-            font-size: 1.65rem !important;
+            font-size: 1.75rem !important;
         }
         
         h3 {
-            font-size: 1.4rem !important;
+            font-size: 1.5rem !important;
         }
         
-        p {
-            font-size: 1.05rem !important;
-            line-height: 1.8 !important;
-        }
-        
-        span {
-            font-size: inherit !important;
+        p, span, div, a, label, input, select, textarea, button {
+            font-size: 1.1rem !important;
         }
         
         small {
-            font-size: 0.95rem !important;
+            font-size: 1rem !important;
+        }
+        
+        /* Button lebih besar dan mudah diklik */
+        button, .btn, a.btn, .btn-primary, .btn-outline {
+            min-height: 56px !important;
+            padding: 16px 24px !important;
+            font-size: 1.2rem !important;
+            font-weight: 700 !important;
+            border-width: 2px !important;
+        }
+        
+        /* Input form lebih besar */
+        input, select, textarea {
+            min-height: 56px !important;
+            padding: 16px !important;
+            font-size: 1.1rem !important;
+            border-width: 2px !important;
+        }
+        
+        /* Link lebih mudah diklik */
+        a {
+            padding: 8px 4px !important;
+            display: inline-block;
+        }
+        
+        /* Spacing lebih lega */
+        .section-container {
+            padding: 0 25px !important;
+        }
+        
+        /* Card lebih besar dan jelas */
+        .news-card, .event-card {
+            padding: 25px !important;
+            margin-bottom: 25px !important;
+        }
+        
+        /* Navigation lebih mudah diakses */
+        .nav-menu a {
+            padding: 18px 20px !important;
+            font-size: 1.2rem !important;
+        }
+        
+        /* Form label lebih jelas */
+        label {
+            font-size: 1.15rem !important;
+            font-weight: 700 !important;
+            margin-bottom: 12px !important;
+            display: block !important;
+        }
+        
+        /* Error messages lebih terlihat */
+        .error, .alert {
+            font-size: 1.1rem !important;
+            padding: 16px !important;
+            line-height: 1.6 !important;
         }
         
         /* Contrast lebih tinggi untuk readability */
         .text-dim {
             color: #374151 !important;
         }
-    }
-
-    /* Perangkat mobile kecil - tetap terbaca */
-    @media (max-width: 480px) {
-        body {
-            font-size: 16px;
-            line-height: 1.75;
-        }
         
-        h1 {
-            font-size: 1.7rem !important;
-        }
-        
-        h2 {
-            font-size: 1.5rem !important;
-        }
-        
-        h3 {
-            font-size: 1.3rem !important;
-        }
-        
-        p {
-            font-size: 1rem !important;
-            line-height: 1.75 !important;
-        }
-        
-        small {
-            font-size: 0.9rem !important;
+        /* Icon lebih besar */
+        svg {
+            width: 24px !important;
+            height: 24px !important;
         }
     }
 
@@ -1204,35 +1228,34 @@
         .hero p { font-size: 12px; margin-bottom: 25px; }
         .hero-content { padding: 0 25px; }
         
-        /* Hero box - ukuran layak untuk orang tua */
+        /* Hero box - much smaller on mobile */
         .hero-box-mobile {
-            padding: 24px 20px !important;
-            max-width: 90% !important;
+            padding: 20px 18px !important;
+            max-width: 85% !important;
         }
         
         .hero-box-mobile h1 {
-            font-size: 1.45rem !important;
-            margin-bottom: 10px !important;
-            line-height: 1.35 !important;
+            font-size: 16px !important;
+            margin-bottom: 8px !important;
+            line-height: 1.3 !important;
         }
         
         .hero-box-mobile p {
-            font-size: 0.8rem !important;
-            margin-bottom: 16px !important;
-            letter-spacing: 0.8px;
+            font-size: 8px !important;
+            margin-bottom: 12px !important;
+            letter-spacing: 1px;
         }
         
         .hero-btns { 
             flex-direction: column; 
-            gap: 12px;
+            gap: 10px;
             width: 100%;
         }
         .btn-primary, .btn-outline { 
             width: 100%;
             text-align: center;
-            padding: 14px 20px !important;
-            font-size: 0.85rem !important;
-            min-height: 52px !important;
+            padding: 8px 16px;
+            font-size: 8px;
         }
         
         /* Sections */
@@ -1303,28 +1326,27 @@
         .hero p { font-size: 11px; letter-spacing: 1.5px; }
         .hero-content { padding: 0 20px; }
         
-        /* Hero box - tetap terbaca di layar kecil */
+        /* Hero box - much smaller */
         .hero-box-mobile {
-            padding: 20px 16px !important;
-            max-width: 88% !important;
+            padding: 18px 15px !important;
+            max-width: 80% !important;
         }
         
         .hero-box-mobile h1 {
-            font-size: 1.25rem !important;
-            margin-bottom: 8px !important;
-            line-height: 1.35 !important;
+            font-size: 14px !important;
+            margin-bottom: 6px !important;
+            line-height: 1.3 !important;
         }
         
         .hero-box-mobile p {
-            font-size: 0.72rem !important;
-            margin-bottom: 12px !important;
-            letter-spacing: 0.7px;
+            font-size: 7px !important;
+            margin-bottom: 10px !important;
+            letter-spacing: 0.8px;
         }
         
         .btn-primary, .btn-outline { 
-            padding: 12px 16px !important;
-            font-size: 0.8rem !important;
-            min-height: 48px !important;
+            padding: 7px 14px;
+            font-size: 7px;
         }
         
         /* Sections */
@@ -1434,296 +1456,6 @@
         
         .footer-container { padding: 0 15px 30px; }
         .social-icon { width: 36px; height: 36px; }
-    }
-}
-
-
-/* =====================================================================
-   MOBILE UX KHUSUS UNTUK ORANG TUA
-   Semua elemen interaktif harus besar, jelas, dan mudah diakses
-   ===================================================================== */
-
-@layer components {
-
-    /* ---- FORM MOBILE (untuk semua halaman) ---- */
-    @media (max-width: 768px) {
-
-        /* Semua input, select, textarea lebih besar */
-        .member-form-container input,
-        .member-form-container select,
-        .member-form-container textarea {
-            min-height: 58px !important;
-            padding: 16px 18px !important;
-            font-size: 1.05rem !important;
-            border-width: 2px !important;
-            border-radius: 8px !important;
-        }
-
-        /* Label form lebih jelas */
-        .member-form-container label {
-            font-size: 1rem !important;
-            font-weight: 700 !important;
-            margin-bottom: 10px !important;
-            display: block !important;
-            letter-spacing: 0.5px !important;
-        }
-
-        /* Tombol submit lebih besar */
-        .member-form-container .btn-primary,
-        .member-form-container button[type="submit"] {
-            min-height: 60px !important;
-            font-size: 1.1rem !important;
-            padding: 18px 24px !important;
-            letter-spacing: 2px !important;
-        }
-
-        /* Grid form: NIK & Telepon jadi satu kolom */
-        .member-form-grid {
-            grid-template-columns: 1fr !important;
-            gap: 20px !important;
-        }
-
-        /* Grid Lokasi jadi satu kolom */
-        .member-location-grid {
-            grid-template-columns: 1fr !important;
-            gap: 20px !important;
-        }
-
-        /* Hint text lebih besar */
-        .member-form-container small {
-            font-size: 0.9rem !important;
-            margin-top: 8px !important;
-        }
-
-        /* Error messages */
-        .member-form-container ul li {
-            font-size: 1rem !important;
-            line-height: 1.6 !important;
-        }
-    }
-
-    /* ---- MOBILE OVERLAY NAVIGATION - Ramah Orang Tua ---- */
-    @media (max-width: 992px) {
-        #mobile-overlay {
-            padding-top: 90px !important;
-        }
-
-        #mobile-overlay a {
-            font-size: 1.1rem !important;
-            padding: 14px 0 !important;
-            letter-spacing: 1.5px !important;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-            width: 100% !important;
-            display: block !important;
-        }
-
-        #mobile-overlay a:last-of-type {
-            border-bottom: none;
-        }
-    }
-
-    /* ---- POPUP AGENDA - Ramah Orang Tua Mobile ---- */
-    @media (max-width: 768px) {
-        #agenda-popup-modal {
-            padding: 16px !important;
-            align-items: flex-end !important; /* Muncul dari bawah layar agar mudah diakses jempol */
-        }
-
-        #agenda-popup-modal > div {
-            max-width: 100% !important;
-            width: 100% !important;
-            border-radius: 20px 20px 0 0 !important; /* Rounded hanya atas */
-            margin: 0 !important;
-        }
-
-        /* Header popup */
-        #agenda-popup-modal > div > div:first-child {
-            padding: 24px 20px !important;
-        }
-
-        #agenda-popup-modal > div > div:first-child .popup-emoji {
-            font-size: 2.5rem !important;
-        }
-
-        #agenda-popup-modal h2 {
-            font-size: 1.5rem !important;
-        }
-
-        #agenda-popup-modal h3 {
-            font-size: 1.15rem !important;
-        }
-
-        /* Body popup */
-        #agenda-popup-modal > div > div:last-child {
-            padding: 20px !important;
-        }
-
-        /* Teks deskripsi popup */
-        #agenda-popup-modal p {
-            font-size: 1.05rem !important;
-            line-height: 1.7 !important;
-            margin-bottom: 20px !important;
-        }
-
-        /* Info card agenda */
-        #agenda-popup-modal .agenda-info-card {
-            padding: 18px !important;
-            margin-bottom: 20px !important;
-        }
-
-        #agenda-popup-modal .agenda-info-card span {
-            font-size: 1rem !important;
-        }
-
-        /* Tombol Ya dan Tidak */
-        #agenda-popup-modal .btn-ya,
-        #agenda-popup-modal .btn-tidak {
-            min-height: 64px !important;
-            font-size: 1.15rem !important;
-            padding: 18px 20px !important;
-            width: 100% !important;
-            min-width: 100% !important;
-        }
-
-        #agenda-popup-modal .popup-actions {
-            flex-direction: column !important;
-            gap: 12px !important;
-        }
-
-        #agenda-popup-modal .popup-note {
-            font-size: 0.9rem !important;
-            margin-top: 16px !important;
-        }
-    }
-
-    /* ---- FLASH TOAST - Lebih Besar di Mobile ---- */
-    @media (max-width: 768px) {
-        #flash-toast {
-            bottom: 20px !important;
-            right: 16px !important;
-            left: 16px !important;
-            max-width: none !important;
-        }
-
-        #flash-toast .flash-msg {
-            padding: 16px 18px !important;
-        }
-
-        #flash-toast .flash-msg div div:first-child {
-            font-size: 1rem !important;
-            font-weight: 700 !important;
-        }
-
-        #flash-toast .flash-msg div div:last-child {
-            font-size: 0.95rem !important;
-            line-height: 1.5 !important;
-        }
-    }
-
-    /* ---- LOGIN PAGE MOBILE ---- */
-    @media (max-width: 768px) {
-        /* Card login lebih mudah diakses */
-        div[style*="max-width: 480px"][style*="backdrop-filter"] {
-            padding: 30px 22px !important;
-            margin: 16px auto !important;
-        }
-
-        /* Input login lebih besar */
-        div[style*="max-width: 480px"] input {
-            min-height: 58px !important;
-            font-size: 1rem !important;
-            padding: 16px 16px 16px 50px !important;
-        }
-
-        /* Tombol login lebih besar */
-        div[style*="max-width: 480px"] button[type="submit"],
-        div[style*="max-width: 480px"] .btn-primary {
-            min-height: 60px !important;
-            font-size: 1.1rem !important;
-            padding: 18px !important;
-        }
-    }
-
-    /* ---- PROFILE EDIT FORM MOBILE ---- */
-    @media (max-width: 768px) {
-        /* Profile form input */
-        form input[style*="padding: 12px"],
-        form input[style*="padding: 14px"],
-        form select[style*="padding: 14px"],
-        form select[style*="padding: 12px"],
-        form textarea[style*="padding: 12px"] {
-            min-height: 56px !important;
-            font-size: 1rem !important;
-            padding: 16px !important;
-        }
-    }
-
-    /* ---- AGENDA HALAMAN DAFTAR PESERTA MOBILE ---- */
-    @media (max-width: 768px) {
-        /* Event register form */
-        .event-register-form {
-            padding: 24px 18px !important;
-        }
-
-        .event-register-form input,
-        .event-register-form select,
-        .event-register-form textarea {
-            min-height: 56px !important;
-            font-size: 1rem !important;
-        }
-
-        .event-register-form label {
-            font-size: 1rem !important;
-            font-weight: 700 !important;
-        }
-
-        .event-register-form button[type="submit"] {
-            min-height: 60px !important;
-            font-size: 1.1rem !important;
-        }
-    }
-
-    /* ---- NEWS CARDS MOBILE - Lebih Besar ---- */
-    @media (max-width: 768px) {
-        .news-body h3 {
-            font-size: 1.15rem !important;
-            line-height: 1.4 !important;
-        }
-
-        .news-body p {
-            font-size: 0.95rem !important;
-            line-height: 1.65 !important;
-        }
-
-        .read-more {
-            font-size: 0.9rem !important;
-            padding: 8px 0 !important;
-        }
-
-        .news-tag {
-            font-size: 0.7rem !important;
-        }
-    }
-
-    /* ---- MUSYAWARAH / AGENDA CARD MOBILE ---- */
-    @media (max-width: 768px) {
-        .musyawarah-content h2 {
-            font-size: 1.4rem !important;
-            line-height: 1.3 !important;
-        }
-
-        .musyawarah-content p {
-            font-size: 0.95rem !important;
-            line-height: 1.7 !important;
-        }
-
-        .event-details span {
-            font-size: 0.95rem !important;
-        }
-
-        .badge {
-            font-size: 0.75rem !important;
-        }
     }
 }
 
