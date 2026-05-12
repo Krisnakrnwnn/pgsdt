@@ -326,20 +326,20 @@
         
         <!-- Agenda Info Card -->
         <div style="background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); padding: 25px; margin-bottom: 30px; border-radius: 0px;">
-          <h3 style="color: var(--accent-gold); font-size: 1.4rem; margin: 0 0 15px 0; font-weight: 700; font-family: 'Cinzel', serif;">{{ session('agenda_for_popup')['title'] }}</h3>
+          <h3 style="color: var(--accent-gold); font-size: 1.4rem; margin: 0 0 15px 0; font-weight: 700; font-family: 'Cinzel', serif;">{{ session('agenda_for_popup.title') }}</h3>
           <div style="display: flex; flex-direction: column; gap: 12px; color: var(--accent-gold-light); font-size: 1.05rem;">
             <div style="display: flex; align-items: center; gap: 10px;">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
-              <span>{{ session('agenda_for_popup')['event_date'] }}</span>
+              <span>{{ session('agenda_for_popup.event_date') }}</span>
             </div>
             <div style="display: flex; align-items: center; gap: 10px;">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
-              <span>{{ session('agenda_for_popup')['location'] ?? 'Lokasi segera diumumkan' }}</span>
+              <span>{{ session('agenda_for_popup.location') ?? 'Lokasi segera diumumkan' }}</span>
             </div>
           </div>
         </div>
@@ -400,20 +400,17 @@
       btn.disabled = true;
       btn.innerHTML = 'Memproses...';
       
-      fetch('{{ route("agenda.popup.register") }}', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
-        body: JSON.stringify({ agenda_id: {{ session('agenda_for_popup')['id'] ?? 0 }} })
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          btn.innerHTML = '✓ BERHASIL TERDAFTAR';
-          btn.style.background = '#4caf50';
-          setTimeout(() => {
-            closeAgendaPopupGlobal();
-            window.location.href = '{{ route("events.show", session("agenda_for_popup")["slug"] ?? "") }}';
-          }, 1500);
+          body: JSON.stringify({ agenda_id: {{ session('agenda_for_popup.id') ?? 0 }} })
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            btn.innerHTML = '✓ BERHASIL TERDAFTAR';
+            btn.style.background = '#4caf50';
+            setTimeout(() => {
+              closeAgendaPopupGlobal();
+              window.location.href = '{{ route("events.show", session("agenda_for_popup.slug") ?? "") }}';
+            }, 1500);
         } else {
           alert(data.message || 'Terjadi kesalahan.');
           btn.disabled = false;
