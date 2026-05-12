@@ -74,6 +74,8 @@ class AuthController extends Controller
             $user->image_path = $request->file('image')->store('members', 'public');
         }
 
+        $isFirstTimeProfile = empty($user->nik);
+
         $user->name = $request->name;
         $user->nik = $request->nik;
         $user->phone = $request->phone;
@@ -81,6 +83,26 @@ class AuthController extends Controller
         $user->kecamatan = $request->kecamatan;
         $user->desa = $request->desa;
         $user->save();
+
+        // Trigger agenda popup if first time completing profile
+        if ($isFirstTimeProfile && !empty($user->nik)) {
+            $upcomingAgenda = \App\Models\Agenda::where('status', 'upcoming')
+                ->where('registration_enabled', true)
+                ->where('event_date', '>=', now())
+                ->orderBy('event_date', 'asc')
+                ->first();
+
+            if ($upcomingAgenda) {
+                $request->session()->put('show_agenda_popup', true);
+                $request->session()->put('agenda_for_popup', [
+                    'id' => $upcomingAgenda->id,
+                    'title' => $upcomingAgenda->title,
+                    'slug' => $upcomingAgenda->slug,
+                    'event_date' => $upcomingAgenda->event_date->isoFormat('D MMMM Y'),
+                    'location' => $upcomingAgenda->location,
+                ]);
+            }
+        }
 
         return redirect()->route('profile')->with('success', 'Profil Anda berhasil diperbarui.');
     }
