@@ -61,8 +61,8 @@
     <thead>
       <tr>
         <th>Nama Lengkap</th>
-        <th>No. Telepon</th>
-        <th>Sumber Info</th>
+        <th>Email</th>
+        <th>Nomor Telpon</th>
         <th>Tanggal Daftar</th>
         <th>Status</th>
         <th>Aksi</th>
@@ -71,12 +71,9 @@
     <tbody>
       @forelse($registrations as $reg)
       <tr>
-        <td>
-            <strong>{{ $reg->name }}</strong><br>
-            <small style="color: var(--text-dim);">{{ $reg->user->email ?? '-' }}</small>
-        </td>
+        <td style="font-weight: 700;">{{ $reg->name }}</td>
+        <td>{{ $reg->user->email ?? '-' }}</td>
         <td>{{ $reg->phone ?? '-' }}</td>
-        <td style="font-size: 0.8rem; color: var(--text-dim);">{{ $reg->information_source ?? '-' }}</td>
         <td>{{ $reg->created_at->format('d/m/Y H:i') }}</td>
         <td>
           <form action="{{ route('admin.agendas.registrations.status', $reg->id) }}" method="POST">
