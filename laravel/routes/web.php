@@ -145,6 +145,7 @@ Route::post('/events/{slug}/register', [AgendaRegistrationController::class, 'st
 
 // Agenda popup registration after user registration
 Route::post('/api/agenda/register-popup', [\App\Http\Controllers\AgendaPopupController::class, 'registerFromPopup'])->name('agenda.popup.register')->middleware(['auth']);
+Route::post('/api/agenda/dismiss-popup', [\App\Http\Controllers\AgendaPopupController::class, 'dismissPopup'])->name('agenda.popup.dismiss')->middleware(['auth']);
 
 Route::get('/heritage', function () {
     return view('pages.heritage');

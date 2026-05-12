@@ -386,6 +386,12 @@
         modal.style.transition = 'opacity 0.3s ease';
         setTimeout(() => modal.remove(), 300);
       }
+      
+      // Notify server to clear session
+      fetch('{{ route("agenda.popup.dismiss") }}', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': '{{ csrf_token() }}' }
+      });
     }
     
     function registerAgendaPopup() {

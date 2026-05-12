@@ -67,9 +67,23 @@ class AgendaPopupController extends Controller
             Auth::user()->notify(new \App\Notifications\EventReminderNotification($agenda));
         }
 
+        // Clear session so popup doesn't show again
+        $request->session()->forget(['show_agenda_popup', 'agenda_for_popup']);
+
         return response()->json([
             'success' => true,
             'message' => 'Anda berhasil terdaftar di agenda ' . $agenda->title
+        ]);
+    /**
+     * Dismiss the agenda popup for the current session
+     */
+    public function dismissPopup(Request $request)
+    {
+        $request->session()->forget(['show_agenda_popup', 'agenda_for_popup']);
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'Popup dismissed'
         ]);
     }
 }
