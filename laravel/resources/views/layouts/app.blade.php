@@ -400,17 +400,20 @@
       btn.disabled = true;
       btn.innerHTML = 'Memproses...';
       
-          body: JSON.stringify({ agenda_id: {{ session('agenda_for_popup.id') ?? 0 }} })
-        })
-        .then(response => response.json())
-        .then(data => {
-          if (data.success) {
-            btn.innerHTML = '✓ BERHASIL TERDAFTAR';
-            btn.style.background = '#4caf50';
-            setTimeout(() => {
-              closeAgendaPopupGlobal();
-              window.location.href = '{{ route("events.show", session("agenda_for_popup.slug") ?? "") }}';
-            }, 1500);
+      fetch('{{ route("agenda.popup.register") }}', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+        body: JSON.stringify({ agenda_id: {{ session('agenda_for_popup.id') ?? 0 }} })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          btn.innerHTML = '✓ BERHASIL TERDAFTAR';
+          btn.style.background = '#4caf50';
+          setTimeout(() => {
+            closeAgendaPopupGlobal();
+            window.location.href = '{{ route("events.show", session("agenda_for_popup.slug") ?? "") }}';
+          }, 1500);
         } else {
           alert(data.message || 'Terjadi kesalahan.');
           btn.disabled = false;
