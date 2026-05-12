@@ -74,6 +74,8 @@ class AgendaPopupController extends Controller
             'success' => true,
             'message' => 'Anda berhasil terdaftar di agenda ' . $agenda->title
         ]);
+    }
+
     /**
      * Dismiss the agenda popup for the current session
      */
