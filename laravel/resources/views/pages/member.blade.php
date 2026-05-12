@@ -4,14 +4,18 @@
 @section('meta_description', 'Daftarkan diri sebagai krama Para Gotra Santana Dalem Tarukan. Dapatkan kartu anggota digital dan akses ke seluruh layanan keluarga besar.')
 
 @section('content')
-  <section class="hero" style="background-image: url('{{ asset('assets/heritage_hero-opt.webp') }}'); border-radius: 0;">
-    <div class="hero-content hero-box-mobile" data-aos="fade-up">
-        <h1 style="font-family: 'Cinzel', serif; font-size: clamp(1.8rem, 6vw, 3rem); margin-bottom: 10px;">Pendaftaran Anggota</h1>
-        <p style="font-size: clamp(0.9rem, 2vw, 1.2rem); opacity: 0.9; text-transform: uppercase; letter-spacing: clamp(1px, 0.5vw, 2px);">Bergabung Menjadi Krama Para Gotra Santana Dalem Tarukan</p>
-    </div>
-  </section>
+<div style="background: var(--primary-dark); min-height: 100vh;">
 
-  <section style="padding: 80px 0 60px; background: var(--primary-dark); min-height: 70vh;">
+  <!-- HERO HEADER -->
+  <div style="position: relative; min-height: 280px; background-image: url('{{ asset('assets/heritage_hero-opt.webp') }}'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; padding-top: 85px;">
+    <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,31,28,0.75), rgba(10,31,28,0.95)); z-index: 1;"></div>
+    <div class="hero-content hero-box-mobile" data-aos="fade-up" style="position: relative; z-index: 2; text-align: center;">
+        <h1 style="font-family: 'Cinzel', serif; font-size: clamp(1.8rem, 6vw, 3rem); margin-bottom: 10px; color: white;">Pendaftaran Anggota</h1>
+        <p style="font-size: clamp(0.9rem, 2vw, 1.1rem); opacity: 0.85; text-transform: uppercase; letter-spacing: clamp(1px, 0.5vw, 2px); color: rgba(255,255,255,0.8);">Bergabung Menjadi Krama Para Gotra Santana Dalem Tarukan</p>
+    </div>
+  </div>
+
+  <section style="padding: 60px 0 80px;">
     <div style="max-width: 700px; margin: 0 auto; padding: 0 20px;">
         <!-- Registration Form -->
         <div class="member-form-container" data-aos="fade-up" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(212,175,55,0.2); padding: 40px; border-radius: 4px;">
@@ -134,6 +138,7 @@
         </div>
     </div>
   </section>
+</div>
 @endsection
 
 @section('scripts')
