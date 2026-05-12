@@ -15,8 +15,9 @@
       <h1 style="text-transform: none;">Para Gotra Santana Dalem Tarukan</h1>
       <p>Memperkuat Persaudaraan, Melestarikan Warisan Leluhur</p>
       <div class="hero-btns" style="margin-top: 20px;">
-        <a href="{{ url('/member') }}" class="btn-primary" style="text-transform: none;">Daftar Anggota</a>
-        <a href="{{ route('events.index') }}" class="btn-outline" style="text-transform: none;">Lihat Agenda</a>
+        @guest
+          <a href="{{ url('/member') }}" class="btn-primary" style="text-transform: none;">Daftar Anggota</a>
+        @endguest
       </div>
     </div>
   </section>
