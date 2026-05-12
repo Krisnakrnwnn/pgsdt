@@ -24,32 +24,6 @@
         </div>
     </div>
 
-    {{-- Filter by status --}}
-    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-        <a href="{{ route('admin.agendas.registrations', $agenda->id) }}"
-           style="padding: 6px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; text-decoration: none;
-                  background: {{ !request('status') ? 'var(--primary-dark)' : '#eee' }};
-                  color: {{ !request('status') ? 'white' : '#555' }};">
-            Semua
-        </a>
-        <a href="{{ route('admin.agendas.registrations', $agenda->id) }}?status=confirmed"
-           style="padding: 6px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; text-decoration: none;
-                  background: {{ request('status') == 'confirmed' ? '#27ae60' : '#eee' }};
-                  color: {{ request('status') == 'confirmed' ? 'white' : '#555' }};">
-            ✅ Dikonfirmasi
-        </a>
-        <a href="{{ route('admin.agendas.registrations', $agenda->id) }}?status=pending"
-           style="padding: 6px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; text-decoration: none;
-                  background: {{ request('status') == 'pending' ? '#f39c12' : '#eee' }};
-                  color: {{ request('status') == 'pending' ? 'white' : '#555' }};">
-            ⏳ Menunggu
-        </a>
-        <a href="{{ route('admin.agendas.registrations', $agenda->id) }}?status=cancelled"
-           style="padding: 6px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; text-decoration: none;
-                  background: {{ request('status') == 'cancelled' ? '#e74c3c' : '#eee' }};
-                  color: {{ request('status') == 'cancelled' ? 'white' : '#555' }};">
-            ❌ Dibatalkan
-        </a>
     </div>
   </div>
 
@@ -64,7 +38,6 @@
         <th>Email</th>
         <th>Nomor Telpon</th>
         <th>Tanggal Daftar</th>
-        <th>Status</th>
         <th>Aksi</th>
       </tr>
     </thead>
@@ -75,19 +48,6 @@
         <td>{{ $reg->user->email ?? '-' }}</td>
         <td>{{ $reg->phone ?? '-' }}</td>
         <td>{{ $reg->created_at->format('d/m/Y H:i') }}</td>
-        <td>
-          <form action="{{ route('admin.agendas.registrations.status', $reg->id) }}" method="POST">
-            @csrf
-            @method('PATCH')
-            <select name="status" onchange="if(confirm('Ubah status pendaftaran ini?')) this.form.submit(); else this.value='{{ $reg->status }}';"
-                    style="padding: 5px 8px; border-radius: 4px; border: 1px solid #ddd; font-size: 0.82rem; cursor: pointer;
-                           background: {{ $reg->status == 'confirmed' ? '#d4edda' : ($reg->status == 'cancelled' ? '#f8d7da' : '#fff8e1') }};">
-                <option value="pending"    {{ $reg->status == 'pending'    ? 'selected' : '' }}>⏳ Menunggu</option>
-                <option value="confirmed"  {{ $reg->status == 'confirmed'  ? 'selected' : '' }}>✅ Dikonfirmasi</option>
-                <option value="cancelled"  {{ $reg->status == 'cancelled'  ? 'selected' : '' }}>❌ Dibatalkan</option>
-            </select>
-          </form>
-        </td>
         <td>
           <div class="action-btns">
             <form action="{{ route('admin.agendas.registrations.destroy', $reg->id) }}" method="POST" onsubmit="return confirm('Hapus data pendaftaran ini?');" style="display:inline;">
@@ -104,7 +64,7 @@
       </tr>
       @empty
       <tr>
-        <td colspan="6" style="text-align: center; padding: 40px; color: var(--text-dim);">
+        <td colspan="5" style="text-align: center; padding: 40px; color: var(--text-dim);">
             Belum ada peserta yang mendaftar.
         </td>
       </tr>
