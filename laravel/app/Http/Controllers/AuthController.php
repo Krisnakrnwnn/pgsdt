@@ -96,8 +96,8 @@ class AuthController extends Controller
                 ->exists();
 
             if (!$isAlreadyRegistered) {
-                $request->session()->put('show_agenda_popup', true);
-                $request->session()->put('agenda_for_popup', [
+                $request->session()->flash('show_agenda_popup', true);
+                $request->session()->flash('agenda_for_popup', [
                     'id' => $upcomingAgenda->id,
                     'title' => $upcomingAgenda->title,
                     'slug' => $upcomingAgenda->slug,
@@ -153,7 +153,9 @@ class AuthController extends Controller
         try {
             $googleUser = Socialite::driver('google')->user();
             
-            // Check if user already exists with this google_id
+            // Clear any lingering agenda popup session during login
+            // We only want it to appear after profile update
+            session()->forget(['show_agenda_popup', 'agenda_for_popup']);
             $user = User::where('google_id', $googleUser->id)->first();
 
             if ($user) {
