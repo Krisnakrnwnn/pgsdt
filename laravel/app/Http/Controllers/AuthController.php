@@ -74,8 +74,6 @@ class AuthController extends Controller
             $user->image_path = $request->file('image')->store('members', 'public');
         }
 
-        $isFirstTimeProfile = empty($user->nik);
-
         $user->name = $request->name;
         $user->nik = $request->nik;
         $user->phone = $request->phone;
@@ -84,15 +82,20 @@ class AuthController extends Controller
         $user->desa = $request->desa;
         $user->save();
 
-        // Trigger agenda popup if first time completing profile
-        if ($isFirstTimeProfile && !empty($user->nik)) {
-            $upcomingAgenda = \App\Models\Agenda::where('status', 'upcoming')
-                ->where('registration_enabled', true)
-                ->where('event_date', '>=', now())
-                ->orderBy('event_date', 'asc')
-                ->first();
+        // Trigger agenda popup after saving changes
+        // Only if user is not already registered for the upcoming agenda
+        $upcomingAgenda = \App\Models\Agenda::where('status', 'upcoming')
+            ->where('registration_enabled', true)
+            ->where('event_date', '>=', now())
+            ->orderBy('event_date', 'asc')
+            ->first();
 
-            if ($upcomingAgenda) {
+        if ($upcomingAgenda) {
+            $isAlreadyRegistered = \App\Models\AgendaRegistration::where('agenda_id', $upcomingAgenda->id)
+                ->where('user_id', $user->id)
+                ->exists();
+
+            if (!$isAlreadyRegistered) {
                 $request->session()->put('show_agenda_popup', true);
                 $request->session()->put('agenda_for_popup', [
                     'id' => $upcomingAgenda->id,
