@@ -1500,12 +1500,6 @@
             font-size: 1rem !important;
             line-height: 1.6 !important;
         }
-
-        /* Teks di form lebih besar */
-        .member-form-container p,
-        .member-form-container div {
-            font-size: 1rem !important;
-        }
     }
 
     /* ---- MOBILE OVERLAY NAVIGATION - Ramah Orang Tua ---- */

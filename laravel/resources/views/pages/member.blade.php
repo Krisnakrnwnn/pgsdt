@@ -11,7 +11,7 @@
     </div>
   </section>
 
-  <section style="padding: 60px 0; background: var(--section-bg);">
+  <section style="padding: 80px 0 60px; background: var(--primary-dark); min-height: 70vh;">
     <div style="max-width: 700px; margin: 0 auto; padding: 0 20px;">
         <!-- Registration Form -->
         <div class="member-form-container" data-aos="fade-up" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(212,175,55,0.2); padding: 40px; border-radius: 4px;">
