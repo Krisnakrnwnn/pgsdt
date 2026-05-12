@@ -11,25 +11,25 @@
     </div>
   </section>
 
-  <section style="padding: 100px 0; background: var(--section-bg); min-height: 60vh; display: flex; align-items: center;">
-    <div style="max-width: 600px; margin: 0 auto; padding: 0 20px; width: 100%;">
-        <div class="member-form-container" data-aos="fade-up" style="background: white; border: 1px solid rgba(212,175,55,0.2); padding: 50px; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.05); text-align: center;">
-          <img src="{{ asset('assets/Logo.png') }}" alt="Dalem Tarukan" style="height: 80px; margin: 0 auto 30px; display: block;">
-          <h2 style="font-family: 'Cinzel', serif; color: var(--primary-dark); margin-bottom: 20px; font-size: 2rem;">Gabung Jadi Krama</h2>
-          <p style="color: #666; font-size: 1.1rem; line-height: 1.6; margin-bottom: 40px;">
-            Pendaftaran anggota baru PGSDT sekarang lebih mudah dan aman menggunakan akun <strong style="color: var(--primary-dark);">Google / Gmail</strong> Anda.
+  <section style="padding: 60px 0; background: var(--section-bg); min-height: 80vh; display: flex; align-items: center; justify-content: center;">
+    <div style="max-width: 500px; margin: 0 auto; padding: 0 15px; width: 100%;">
+        <div class="member-form-container" data-aos="fade-up" style="background: white; border: 1px solid rgba(212,175,55,0.2); padding: clamp(30px, 8vw, 50px); border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.08); text-align: center;">
+          <img src="{{ asset('assets/Logo.png') }}" alt="Dalem Tarukan" style="height: 70px; margin: 0 auto 25px; display: block;">
+          <h2 style="font-family: 'Cinzel', serif; color: var(--primary-dark); margin-bottom: 15px; font-size: clamp(1.5rem, 6vw, 2.2rem); line-height: 1.2;">Gabung Jadi Krama</h2>
+          <p style="color: #666; font-size: clamp(0.95rem, 3vw, 1.1rem); line-height: 1.6; margin-bottom: 35px; max-width: 90%; margin-left: auto; margin-right: auto;">
+            Pendaftaran anggota baru PGSDT lebih mudah dan aman menggunakan akun <strong style="color: var(--primary-dark);">Google / Gmail</strong>.
           </p>
 
-          <a href="{{ route('auth.google') }}" style="width: 100%; padding: 20px; border-radius: 12px; border: none; background: var(--primary-dark); color: white; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 1.1rem; font-weight: 700; font-family: 'Cinzel', serif; transition: all 0.3s; box-sizing: border-box; text-transform: uppercase; letter-spacing: 1.5px; box-shadow: 0 10px 20px rgba(10,31,28,0.2);" 
+          <a href="{{ route('auth.google') }}" style="width: 100%; padding: 18px 15px; border-radius: 12px; border: none; background: var(--primary-dark); color: white; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: clamp(0.9rem, 4vw, 1.1rem); font-weight: 800; font-family: 'Cinzel', serif; transition: all 0.3s; box-sizing: border-box; text-transform: uppercase; letter-spacing: 1.5px; box-shadow: 0 10px 20px rgba(10,31,28,0.2); white-space: nowrap;" 
              onmouseover="this.style.background='var(--accent-gold)'; this.style.color='var(--primary-dark)'; this.style.transform='translateY(-2px)'" 
              onmouseout="this.style.background='var(--primary-dark)'; this.style.color='white'; this.style.transform='translateY(0)'">
-              <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" style="width: 24px; margin-right: 15px; filter: brightness(0) invert(1);" id="google-icon">
-              Daftar Sekarang
+              <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" style="width: 22px; height: 22px; margin-right: 12px; filter: brightness(0) invert(1);" id="google-icon">
+              <span>Daftar Sekarang</span>
           </a>
 
-          <div style="margin-top: 40px; padding-top: 30px; border-top: 1px solid #eee;">
-            <p style="color: #888; font-size: 0.9rem; margin-bottom: 10px;">Sudah pernah mendaftar?</p>
-            <a href="{{ url('/login') }}" style="color: var(--accent-gold); font-weight: 700; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem;">Masuk di sini</a>
+          <div style="margin-top: 40px; padding-top: 25px; border-top: 1px solid #eee;">
+            <p style="color: #888; font-size: 0.9rem; margin-bottom: 8px;">Sudah pernah mendaftar?</p>
+            <a href="{{ url('/login') }}" style="color: var(--accent-gold); font-weight: 800; text-decoration: none; text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.9rem; border-bottom: 2px solid transparent; transition: all 0.3s;" onmouseover="this.style.borderBottomColor='var(--accent-gold)'" onmouseout="this.style.borderBottomColor='transparent'">Masuk di sini</a>
           </div>
         </div>
     </div>
@@ -38,8 +38,10 @@
   <script>
     const btn = document.querySelector('a[href="{{ route("auth.google") }}"]');
     const icon = document.getElementById('google-icon');
-    btn.addEventListener('mouseover', () => icon.style.filter = 'none');
-    btn.addEventListener('mouseout', () => icon.style.filter = 'brightness(0) invert(1)');
+    if (btn && icon) {
+        btn.addEventListener('mouseover', () => icon.style.filter = 'none');
+        btn.addEventListener('mouseout', () => icon.style.filter = 'brightness(0) invert(1)');
+    }
   </script>
 @endsection
 

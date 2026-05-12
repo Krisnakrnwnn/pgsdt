@@ -27,20 +27,20 @@
         @endif
 
         <div style="text-align: center;">
-            <p style="color: rgba(255,255,255,0.7); font-size: 1.1rem; line-height: 1.6; margin-bottom: 35px; font-family: 'Inter', sans-serif;">
+            <p style="color: rgba(255,255,255,0.7); font-size: clamp(0.9rem, 3vw, 1.1rem); line-height: 1.6; margin-bottom: 30px; font-family: 'Inter', sans-serif;">
                 Untuk keamanan dan kemudahan krama, akses portal sekarang menggunakan akun <strong style="color: white;">Gmail / Google</strong>.
             </p>
 
-            <a href="{{ route('auth.google') }}" style="width: 100%; padding: 20px; border-radius: 16px; border: 2px solid var(--accent-gold); background: rgba(212,175,55,0.1); color: white; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 1.1rem; font-weight: 700; font-family: 'Cinzel', serif; transition: all 0.3s; box-sizing: border-box; text-transform: uppercase; letter-spacing: 1px;" 
+            <a href="{{ route('auth.google') }}" style="width: 100%; padding: 18px 15px; border-radius: 16px; border: 2px solid var(--accent-gold); background: rgba(212,175,55,0.1); color: white; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: clamp(0.9rem, 4vw, 1.1rem); font-weight: 700; font-family: 'Cinzel', serif; transition: all 0.3s; box-sizing: border-box; text-transform: uppercase; letter-spacing: 1px; white-space: nowrap;" 
                onmouseover="this.style.background='var(--accent-gold)'; this.style.color='var(--primary-dark)'" 
                onmouseout="this.style.background='rgba(212,175,55,0.1)'; this.style.color='white'">
-                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" style="width: 24px; margin-right: 15px;">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" style="width: 22px; height: 22px; margin-right: 12px;">
                 Masuk dengan Google
             </a>
 
-            <div style="margin-top: 40px; padding: 20px; background: rgba(212,175,55,0.05); border-radius: 12px; border: 1px dashed rgba(212,175,55,0.3);">
-                <p style="color: var(--accent-gold-light); font-size: 0.85rem; margin: 0; line-height: 1.5;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display: inline; margin-bottom: -3px; margin-right: 5px;">
+            <div style="margin-top: 35px; padding: 15px; background: rgba(212,175,55,0.05); border-radius: 12px; border: 1px dashed rgba(212,175,55,0.3);">
+                <p style="color: var(--accent-gold-light); font-size: 0.8rem; margin: 0; line-height: 1.5;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display: inline; margin-bottom: -2px; margin-right: 4px;">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     Pendaftaran anggota baru juga dilakukan melalui tombol di atas.
