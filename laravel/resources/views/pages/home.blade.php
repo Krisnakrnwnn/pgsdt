@@ -21,23 +21,22 @@
     </div>
   </section>
 
-  <!-- DYNAMIC EVENT SECTION -->
   @if($latestEvent)
-  <section class="musyawarah-section">
+  <section class="musyawarah-section" style="padding: 60px 0;">
     <div class="section-container">
-      <div class="musyawarah-card" data-aos="fade-up">
-        <div class="musyawarah-content">
-          <span class="badge" style="border-radius: 0px; text-transform: none;">Agenda Utama</span>
-          <h2 style="font-family: 'Cinzel', serif; text-transform: none;">{{ $latestEvent->title }}</h2>
-          <p>{{ Str::limit(strip_tags($latestEvent->description), 200) }}</p>
-          <div class="event-details">
-            <span style="display: flex; align-items: center; gap: 8px;"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> {{ \Carbon\Carbon::parse($latestEvent->event_date)->isoFormat('dddd, D MMMM Y') }}</span>
-            <span style="display: flex; align-items: center; gap: 8px;"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> {{ $latestEvent->location ?? 'Lokasi segera diumumkan' }}</span>
+      <div class="musyawarah-card" data-aos="fade-up" style="border-radius: 0px; box-shadow: 0 15px 40px rgba(0,0,0,0.2);">
+        <div class="musyawarah-content" style="padding: clamp(30px, 8vw, 60px) clamp(20px, 5vw, 40px);">
+          <span class="badge" style="border-radius: 0px; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 20px; display: inline-block;">Agenda Utama</span>
+          <h2 style="font-family: 'Cinzel', serif; text-transform: uppercase; font-size: clamp(1.6rem, 5vw, 2.5rem); line-height: 1.3; margin-bottom: 20px;">{{ $latestEvent->title }}</h2>
+          <p style="font-size: clamp(1rem, 3vw, 1.15rem); line-height: 1.8; color: rgba(255,255,255,0.7); margin-bottom: 30px;">{{ Str::limit(strip_tags($latestEvent->description), 200) }}</p>
+          <div class="event-details" style="margin-bottom: 40px; display: flex; flex-direction: column; gap: 15px;">
+            <span style="display: flex; align-items: center; gap: 12px; font-size: 1.1rem;"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> {{ \Carbon\Carbon::parse($latestEvent->event_date)->isoFormat('dddd, D MMMM Y') }}</span>
+            <span style="display: flex; align-items: center; gap: 12px; font-size: 1.1rem;"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> {{ $latestEvent->location ?? 'Lokasi segera diumumkan' }}</span>
           </div>
-          <div class="btn-group">
-              <a href="{{ route('events.show', $latestEvent->slug) }}" class="btn-primary" style="border-radius: 0px; text-decoration: none; text-transform: none;">Lihat Detail</a>
+          <div class="btn-group" style="display: flex; flex-direction: column; gap: 15px;">
+              <a href="{{ route('events.show', $latestEvent->slug) }}" class="btn-primary" style="border-radius: 0px; text-decoration: none; text-transform: uppercase; padding: 18px; font-size: 1.1rem; font-weight: 800; text-align: center; letter-spacing: 1px;">Lihat Detail Agenda</a>
               @if($latestEvent->registration_enabled)
-                <a href="{{ route('events.register', $latestEvent->slug) }}" class="btn-outline" style="border-radius: 0px; text-decoration: none; border-color: var(--accent-gold); color: var(--accent-gold); text-transform: none;">Registrasi Peserta</a>
+                <a href="{{ route('events.register', $latestEvent->slug) }}" class="btn-outline" style="border-radius: 0px; text-decoration: none; border-color: var(--accent-gold); color: var(--accent-gold); text-transform: uppercase; padding: 18px; font-size: 1.1rem; font-weight: 800; text-align: center; letter-spacing: 1px;">Registrasi Peserta</a>
               @endif
           </div>
         </div>
