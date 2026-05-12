@@ -9,14 +9,13 @@
 @section('meta_description', 'Portal resmi Para Gotra Santana Dalem Tarukan. Bergabunglah dalam memperkuat persaudaraan dan melestarikan warisan leluhur Bali.')
 
 @section('content')
-  <!-- HERO -->
   <section class="hero hero-fullscreen" style="background-image: url('{{ asset('assets/heritage_hero-opt.webp') }}'); border-radius: 0px;">
-    <div class="hero-content hero-box-mobile" data-aos="fade-up" data-aos-duration="1000" style="background: rgba(10, 31, 28, 0.4); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 4px; padding: 50px 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
-      <h1 style="text-transform: none;">Para Gotra Santana Dalem Tarukan</h1>
-      <p>Memperkuat Persaudaraan, Melestarikan Warisan Leluhur</p>
-      <div class="hero-btns" style="margin-top: 20px;">
+    <div class="hero-content hero-box-mobile" data-aos="fade-up" data-aos-duration="1000" style="background: rgba(10, 31, 28, 0.6); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 4px; padding: clamp(30px, 8vw, 60px) clamp(20px, 5vw, 40px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); width: 90%; max-width: 800px;">
+      <h1 style="text-transform: uppercase; font-size: clamp(1.8rem, 6vw, 3.5rem); line-height: 1.2; margin-bottom: 15px; font-family: 'Cinzel', serif;">Para Gotra Santana Dalem Tarukan</h1>
+      <p style="font-size: clamp(0.9rem, 3vw, 1.3rem); margin-bottom: 25px; letter-spacing: 1px; color: rgba(255,255,255,0.9);">Memperkuat Persaudaraan, Melestarikan Warisan Leluhur</p>
+      <div class="hero-btns" style="margin-top: 10px;">
         @guest
-          <a href="{{ url('/member') }}" class="btn-primary" style="text-transform: none;">Daftar Anggota</a>
+          <a href="{{ url('/member') }}" class="btn-primary" style="text-transform: uppercase; font-weight: 800; font-size: clamp(1rem, 2.5vw, 1.2rem); padding: 18px 40px; letter-spacing: 2px;">Daftar Anggota</a>
         @endguest
       </div>
     </div>
