@@ -46,7 +46,102 @@
                     Pendaftaran anggota baru juga dilakukan melalui tombol di atas.
                 </p>
             </div>
+
+            {{-- Admin Login Toggle --}}
+            <div style="margin-top: 30px; text-align: center;">
+                <button type="button" id="toggleAdminLogin"
+                    onclick="toggleAdminForm()"
+                    style="background: none; border: none; color: rgba(255,255,255,0.3); font-size: 0.72rem; cursor: pointer; font-family: 'Inter', sans-serif; letter-spacing: 0.5px; transition: color 0.3s; padding: 6px 12px; border-radius: 8px;"
+                    onmouseover="this.style.color='rgba(212,175,55,0.6)'"
+                    onmouseout="this.style.color='rgba(255,255,255,0.3)'">
+                    🔐 Masuk sebagai Admin
+                </button>
+            </div>
+
+            {{-- Admin Login Form (Hidden by default) --}}
+            <div id="adminLoginForm" style="display: none; margin-top: 20px; border-top: 1px solid rgba(212,175,55,0.15); padding-top: 25px;">
+                <p style="color: rgba(212,175,55,0.8); font-size: 0.78rem; text-align: center; margin-bottom: 20px; font-family: 'Cinzel', serif; letter-spacing: 1px;">AKSES ADMINISTRATOR</p>
+
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
+
+                    <div style="margin-bottom: 16px;">
+                        <label for="admin_email" style="display: block; color: rgba(255,255,255,0.6); font-size: 0.78rem; margin-bottom: 8px; font-family: 'Inter', sans-serif;">Email Admin</label>
+                        <input
+                            type="email"
+                            id="admin_email"
+                            name="email"
+                            value="{{ old('email') }}"
+                            required
+                            autocomplete="email"
+                            placeholder="admin@dalemtarukan.net"
+                            style="width: 100%; padding: 14px 16px; background: rgba(255,255,255,0.06); border: 1px solid rgba(212,175,55,0.25); border-radius: 12px; color: white; font-size: 0.9rem; font-family: 'Inter', sans-serif; outline: none; box-sizing: border-box; transition: border-color 0.3s;"
+                            onfocus="this.style.borderColor='rgba(212,175,55,0.6)'"
+                            onblur="this.style.borderColor='rgba(212,175,55,0.25)'"
+                        >
+                    </div>
+
+                    <div style="margin-bottom: 22px;">
+                        <label for="admin_password" style="display: block; color: rgba(255,255,255,0.6); font-size: 0.78rem; margin-bottom: 8px; font-family: 'Inter', sans-serif;">Password</label>
+                        <div style="position: relative;">
+                            <input
+                                type="password"
+                                id="admin_password"
+                                name="password"
+                                required
+                                autocomplete="current-password"
+                                placeholder="••••••••"
+                                style="width: 100%; padding: 14px 46px 14px 16px; background: rgba(255,255,255,0.06); border: 1px solid rgba(212,175,55,0.25); border-radius: 12px; color: white; font-size: 0.9rem; font-family: 'Inter', sans-serif; outline: none; box-sizing: border-box; transition: border-color 0.3s;"
+                                onfocus="this.style.borderColor='rgba(212,175,55,0.6)'"
+                                onblur="this.style.borderColor='rgba(212,175,55,0.25)'"
+                            >
+                            <button type="button" onclick="togglePassword()" style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: rgba(255,255,255,0.4); padding: 0;">
+                                <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <button type="submit"
+                        style="width: 100%; padding: 15px; border-radius: 12px; border: 1px solid rgba(212,175,55,0.5); background: rgba(212,175,55,0.15); color: var(--accent-gold); font-size: 0.9rem; font-weight: 700; font-family: 'Cinzel', serif; cursor: pointer; letter-spacing: 1px; transition: all 0.3s; text-transform: uppercase;"
+                        onmouseover="this.style.background='rgba(212,175,55,0.9)'; this.style.color='#0a1f1c';"
+                        onmouseout="this.style.background='rgba(212,175,55,0.15)'; this.style.color='var(--accent-gold)';"
+                    >
+                        Masuk
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
+
+<script>
+    function toggleAdminForm() {
+        const form = document.getElementById('adminLoginForm');
+        const btn = document.getElementById('toggleAdminLogin');
+        if (form.style.display === 'none') {
+            form.style.display = 'block';
+            btn.textContent = '✕ Tutup Login Admin';
+            btn.style.color = 'rgba(212,175,55,0.6)';
+        } else {
+            form.style.display = 'none';
+            btn.textContent = '🔐 Masuk sebagai Admin';
+            btn.style.color = 'rgba(255,255,255,0.3)';
+        }
+    }
+
+    function togglePassword() {
+        const input = document.getElementById('admin_password');
+        input.type = input.type === 'password' ? 'text' : 'password';
+    }
+
+    // Auto-show form if ada error dari form admin
+    @if($errors->has('email') && old('email'))
+        document.addEventListener('DOMContentLoaded', function() {
+            toggleAdminForm();
+        });
+    @endif
+</script>
 @endsection

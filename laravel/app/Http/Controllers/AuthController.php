@@ -17,7 +17,31 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        return redirect('/login')->withErrors(['email' => 'Login manual telah dinonaktifkan. Silakan gunakan Google Login.']);
+        $request->validate([
+            'email'    => 'required|email',
+            'password' => 'required|string',
+        ]);
+
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+
+            // Hanya izinkan role admin
+            if ($user->role !== 'admin') {
+                Auth::logout();
+                return redirect('/login')->withErrors([
+                    'email' => 'Akses ditolak. Login ini hanya untuk administrator.',
+                ])->withInput($request->only('email'));
+            }
+
+            $request->session()->regenerate();
+            return redirect()->intended('/admin');
+        }
+
+        return redirect('/login')->withErrors([
+            'email' => 'Email atau password salah.',
+        ])->withInput($request->only('email'));
     }
 
     public function register(Request $request)
