@@ -213,65 +213,6 @@ Route::post('/reset-password', function (\Illuminate\Http\Request $request) {
 })->middleware('guest')->name('password.store');
 
 
-Route::get('/email/verify', function () {
-    if (auth()->user()->hasVerifiedEmail()) {
-        return redirect('/');
-    }
-    return view('auth.verify-email');
-})->middleware('auth')->name('verification.notice');
-
-Route::get('/email/verify/{id}/{hash}', function (Request $request, $id, $hash) {
-    // Validasi signature dulu (cek expires & tampering)
-    if (! $request->hasValidSignature()) {
-        return redirect()->route('verification.notice')
-            ->with('warning', 'Tautan verifikasi sudah kedaluwarsa atau tidak valid. Silakan minta tautan baru.');
-    }
-
-    // Cari user termasuk yang soft-deleted
-    $user = \App\Models\User::withTrashed()->findOrFail($id);
-
-    // Restore jika ter-soft-delete
-    if ($user->trashed()) {
-        $user->restore();
-    }
-
-    // Validasi hash
-    if (! hash_equals((string) $hash, sha1($user->getEmailForVerification()))) {
-        abort(403, 'Tautan verifikasi tidak valid.');
-    }
-
-    // Sudah terverifikasi sebelumnya
-    if ($user->hasVerifiedEmail()) {
-        if (auth()->check()) {
-            return redirect('/')->with('info', 'Email Anda sudah terverifikasi sebelumnya.');
-        }
-        return redirect()->route('login')->with('info', 'Email Anda sudah terverifikasi. Silakan login.');
-    }
-
-    // Tandai email sebagai terverifikasi
-    $user->markEmailAsVerified();
-
-    // Aktifkan member otomatis
-    $user->member_status = 'active';
-    $user->save();
-
-    // Kirim notifikasi selamat datang
-    $user->notify(new \App\Notifications\MemberVerifiedNotification('approved'));
-
-    // Login jika belum
-    if (! auth()->check()) {
-        auth()->login($user);
-    }
-
-    return redirect('/')->with('success', 'Email berhasil diverifikasi! Akun Anda sekarang aktif.');
-})->name('verification.verify');
-
-Route::post('/email/verification-notification', function (Request $request) {
-    $request->user()->sendEmailVerificationNotification();
-    return back()->with('message', 'Tautan verifikasi telah dikirim ulang!');
-})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
-
-Route::post('/email/cancel', [AuthController::class, 'cancelRegistration'])->middleware('auth')->name('verification.cancel');
 
 
 // Admin Routes protected by basic role check

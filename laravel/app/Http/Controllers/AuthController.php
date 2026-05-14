@@ -79,14 +79,13 @@ class AuthController extends Controller
             'desa' => $request->desa,
             'register_number' => $registerNumber,
             'role' => 'member',
-            'member_status' => 'pending',
+            'member_status' => 'active',
+            'email_verified_at' => now(),
         ]);
 
         Auth::login($user);
 
-        $user->sendEmailVerificationNotification();
-
-        return redirect()->route('verification.notice');
+        return redirect('/')->with('success', 'Pendaftaran berhasil! Selamat datang di portal PGSDT.');
     }
 
     public function logout(Request $request)
