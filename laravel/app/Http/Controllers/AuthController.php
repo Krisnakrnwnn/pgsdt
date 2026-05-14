@@ -26,17 +26,19 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
+            $request->session()->regenerate();
 
-            // Hanya izinkan role admin
-            if ($user->role !== 'admin') {
-                Auth::logout();
-                return redirect('/login')->withErrors([
-                    'email' => 'Akses ditolak. Login ini hanya untuk administrator.',
-                ])->withInput($request->only('email'));
+            // Redirect based on role
+            if ($user->role === 'admin') {
+                return redirect()->intended('/admin');
             }
 
-            $request->session()->regenerate();
-            return redirect()->intended('/admin');
+            // For regular members, check if profile is complete
+            if (!$user->nik) {
+                return redirect()->route('profile.edit')->with('info', 'Harap lengkapi profil Anda (NIK, No. HP, dan Alamat) untuk menyelesaikan pendaftaran.');
+            }
+
+            return redirect()->intended('/');
         }
 
         return redirect('/login')->withErrors([

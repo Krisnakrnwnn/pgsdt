@@ -38,7 +38,7 @@
                     name="email"
                     value="{{ old('email') }}"
                     autocomplete="email"
-                    placeholder="Email admin"
+                    placeholder="Email Anda"
                     style="width: 100%; padding: 14px 16px; background: rgba(255,255,255,0.06); border: 1px solid rgba(212,175,55,0.25); border-radius: 12px; color: white; font-size: 0.9rem; font-family: 'Inter', sans-serif; outline: none; box-sizing: border-box; transition: border-color 0.3s;"
                     onfocus="this.style.borderColor='rgba(212,175,55,0.6)'"
                     onblur="this.style.borderColor='rgba(212,175,55,0.25)'"
@@ -79,7 +79,7 @@
         {{-- Divider --}}
         <div style="display: flex; align-items: center; margin: 28px 0;">
             <div style="flex: 1; height: 1px; background: rgba(255,255,255,0.1);"></div>
-            <span style="padding: 0 14px; color: rgba(255,255,255,0.35); font-size: 0.78rem; font-family: 'Inter', sans-serif;">atau masuk sebagai krama</span>
+            <span style="padding: 0 14px; color: rgba(255,255,255,0.35); font-size: 0.78rem; font-family: 'Inter', sans-serif;">atau gunakan metode lain</span>
             <div style="flex: 1; height: 1px; background: rgba(255,255,255,0.1);"></div>
         </div>
 
