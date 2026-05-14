@@ -46,7 +46,41 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        return redirect('/member')->withErrors(['email' => 'Pendaftaran manual telah dinonaktifkan. Silakan daftar menggunakan Google Login.']);
+        $request->validate([
+            'name'      => 'required|string|max:255|regex:/^[\pL\s\-\.]+$/u',
+            'email'     => 'required|string|email|max:255|unique:users,email',
+            'password'  => 'required|string|min:8|confirmed',
+            'nik'       => ['required', 'string', 'size:16', 'regex:/^[0-9]{16}$/', \Illuminate\Validation\Rule::unique('users', 'nik')->withoutTrashed()],
+            'phone'     => 'nullable|string|max:20|regex:/^[0-9\+\-\s]+$/',
+            'kabupaten' => 'required|string|max:100',
+            'kecamatan' => 'required|string|max:100',
+            'desa'      => 'required|string|max:100',
+        ]);
+
+        // Generate register number
+        do {
+            $registerNumber = 'PGSDT-' . date('Ym') . str_pad(random_int(1, 99999), 5, '0', STR_PAD_LEFT);
+        } while (User::withTrashed()->where('register_number', $registerNumber)->exists());
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => \Illuminate\Support\Facades\Hash::make($request->password),
+            'nik' => $request->nik,
+            'phone' => $request->phone,
+            'kabupaten' => $request->kabupaten,
+            'kecamatan' => $request->kecamatan,
+            'desa' => $request->desa,
+            'register_number' => $registerNumber,
+            'role' => 'member',
+            'member_status' => 'pending',
+        ]);
+
+        Auth::login($user);
+
+        $user->sendEmailVerificationNotification();
+
+        return redirect()->route('verification.notice');
     }
 
     public function logout(Request $request)
