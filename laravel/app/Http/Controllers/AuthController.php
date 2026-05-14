@@ -303,8 +303,8 @@ class AuthController extends Controller
                 ->exists();
 
             if (!$isAlreadyRegistered) {
-                session()->flash('show_agenda_popup', true);
-                session()->flash('agenda_for_popup', [
+                session()->put('show_agenda_popup', true);
+                session()->put('agenda_for_popup', [
                     'id' => $upcomingAgenda->id,
                     'title' => $upcomingAgenda->title,
                     'slug' => $upcomingAgenda->slug,

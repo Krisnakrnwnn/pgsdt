@@ -276,8 +276,8 @@ Route::get('/email/verify/{id}/{hash}', function (Request $request, $id, $hash) 
             ->exists();
 
         if (!$isAlreadyRegistered) {
-            $request->session()->flash('show_agenda_popup', true);
-            $request->session()->flash('agenda_for_popup', [
+            $request->session()->put('show_agenda_popup', true);
+            $request->session()->put('agenda_for_popup', [
                 'id' => $upcomingAgenda->id,
                 'title' => $upcomingAgenda->title,
                 'slug' => $upcomingAgenda->slug,
