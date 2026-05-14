@@ -48,7 +48,7 @@ class AuthController extends Controller
     {
         $request->validate([
             'name'      => 'required|string|max:255|regex:/^[\pL\s\-\.]+$/u',
-            'email'     => 'required|string|email|max:255|unique:users,email',
+            'email'     => ['required', 'string', 'email', 'max:255', \Illuminate\Validation\Rule::unique('users', 'email')->withoutTrashed()],
             'password'  => 'required|string|min:8|confirmed',
             'nik'       => ['required', 'string', 'size:16', 'regex:/^[0-9]{16}$/', \Illuminate\Validation\Rule::unique('users', 'nik')->withoutTrashed()],
             'phone'     => 'nullable|string|max:20|regex:/^[0-9\+\-\s]+$/',
@@ -56,6 +56,10 @@ class AuthController extends Controller
             'kecamatan' => 'required|string|max:100',
             'desa'      => 'required|string|max:100',
         ]);
+
+        // Cleanup soft-deleted records to avoid unique constraint violations in DB
+        User::withTrashed()->where('email', $request->email)->whereNotNull('deleted_at')->forceDelete();
+        User::withTrashed()->where('nik', $request->nik)->whereNotNull('deleted_at')->forceDelete();
 
         // Generate register number
         do {
@@ -124,6 +128,9 @@ class AuthController extends Controller
                 'dimensions:min_width=100,min_height=100,max_width=2000,max_height=2000',
             ],
         ]);
+
+        // Cleanup soft-deleted records with the same NIK to avoid DB conflict
+        User::withTrashed()->where('nik', $request->nik)->where('id', '!=', $user->id)->whereNotNull('deleted_at')->forceDelete();
 
         if ($request->hasFile('image')) {
             if ($user->image_path) {
