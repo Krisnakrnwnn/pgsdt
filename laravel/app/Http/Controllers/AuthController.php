@@ -293,7 +293,7 @@ class AuthController extends Controller
 
         $upcomingAgenda = \App\Models\Agenda::where('status', 'upcoming')
             ->where('registration_enabled', true)
-            ->where('event_date', '>=', now())
+            ->where('event_date', '>=', now()->startOfDay())
             ->orderBy('event_date', 'asc')
             ->first();
 

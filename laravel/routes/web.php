@@ -266,7 +266,7 @@ Route::get('/email/verify/{id}/{hash}', function (Request $request, $id, $hash) 
     // Flash upcoming agenda data to session for the registration popup.
     $upcomingAgenda = \App\Models\Agenda::where('status', 'upcoming')
         ->where('registration_enabled', true)
-        ->where('event_date', '>=', now())
+        ->where('event_date', '>=', now()->startOfDay())
         ->orderBy('event_date', 'asc')
         ->first();
 
@@ -276,8 +276,8 @@ Route::get('/email/verify/{id}/{hash}', function (Request $request, $id, $hash) 
             ->exists();
 
         if (!$isAlreadyRegistered) {
-            session()->flash('show_agenda_popup', true);
-            session()->flash('agenda_for_popup', [
+            $request->session()->flash('show_agenda_popup', true);
+            $request->session()->flash('agenda_for_popup', [
                 'id' => $upcomingAgenda->id,
                 'title' => $upcomingAgenda->title,
                 'slug' => $upcomingAgenda->slug,
