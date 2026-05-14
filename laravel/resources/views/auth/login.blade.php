@@ -91,13 +91,14 @@
             Masuk dengan Google
         </a>
 
-        <div style="margin-top: 20px; padding: 15px; background: rgba(212,175,55,0.05); border-radius: 12px; border: 1px dashed rgba(212,175,55,0.3);">
-            <p style="color: var(--accent-gold-light); font-size: 0.75rem; margin: 0; line-height: 1.5;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display: inline; margin-bottom: -2px; margin-right: 4px;">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                Pendaftaran anggota baru juga dilakukan melalui tombol di atas.
-            </p>
+        <div style="margin-top: 25px; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+            <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-bottom: 10px;">Belum punya akun?</p>
+            <a href="{{ url('/member') }}" 
+               style="color: var(--accent-gold); font-weight: 800; text-decoration: none; text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.85rem; border: 1px solid var(--accent-gold); padding: 10px 20px; border-radius: 10px; display: inline-block; transition: all 0.3s;"
+               onmouseover="this.style.background='var(--accent-gold)'; this.style.color='var(--primary-dark)'"
+               onmouseout="this.style.background='transparent'; this.style.color='var(--accent-gold)'">
+                Daftar Sebagai Anggota
+            </a>
         </div>
     </div>
 </div>
