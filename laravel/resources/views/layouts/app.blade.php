@@ -309,6 +309,34 @@
   
   @auth
   @php
+      // Check for upcoming agenda if user is a member and hasn't dismissed the popup
+      if (auth()->user()->role === 'member' && !session('agenda_popup_dismissed')) {
+          if (!session()->has('show_agenda_popup')) {
+              $upcomingAgenda = \App\Models\Agenda::where('status', 'upcoming')
+                  ->where('registration_enabled', true)
+                  ->where('event_date', '>=', now()->startOfDay())
+                  ->orderBy('event_date', 'asc')
+                  ->first();
+
+              if ($upcomingAgenda) {
+                  $isAlreadyRegistered = \App\Models\AgendaRegistration::where('agenda_id', $upcomingAgenda->id)
+                      ->where('user_id', auth()->id())
+                      ->exists();
+
+                  if (!$isAlreadyRegistered) {
+                      session()->put('show_agenda_popup', true);
+                      session()->put('agenda_for_popup', [
+                          'id' => $upcomingAgenda->id,
+                          'title' => $upcomingAgenda->title,
+                          'slug' => $upcomingAgenda->slug,
+                          'event_date' => $upcomingAgenda->event_date->isoFormat('D MMMM Y'),
+                          'location' => $upcomingAgenda->location,
+                      ]);
+                  }
+              }
+          }
+      }
+      
       $showPopup = session('show_agenda_popup');
       $agendaData = session('agenda_for_popup');
   @endphp

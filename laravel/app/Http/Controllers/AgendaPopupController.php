@@ -82,6 +82,7 @@ class AgendaPopupController extends Controller
     public function dismissPopup(Request $request)
     {
         $request->session()->forget(['show_agenda_popup', 'agenda_for_popup']);
+        $request->session()->put('agenda_popup_dismissed', true);
         
         return response()->json([
             'success' => true,

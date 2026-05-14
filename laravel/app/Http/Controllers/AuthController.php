@@ -38,7 +38,6 @@ class AuthController extends Controller
                 return redirect()->route('profile.edit')->with('info', 'Harap lengkapi profil Anda (NIK, No. HP, dan Alamat) untuk menyelesaikan pendaftaran.');
             }
 
-            $this->flashAgendaPopup($user);
             return redirect()->intended('/');
         }
 
@@ -149,8 +148,6 @@ class AuthController extends Controller
         $user->kecamatan = $request->kecamatan;
         $user->desa = $request->desa;
         $user->save();
-
-        $this->flashAgendaPopup($user);
 
         return redirect()->route('profile')->with('success', 'Profil Anda berhasil diperbarui.');
     }
@@ -275,43 +272,10 @@ class AuthController extends Controller
                 return redirect()->route('profile.edit')->with('info', 'Harap lengkapi profil Anda (NIK, No. HP, dan Alamat) untuk menyelesaikan pendaftaran.');
             }
 
-            $this->flashAgendaPopup($user);
             return redirect()->intended('/');
 
         } catch (Exception $e) {
             return redirect('/login')->withErrors(['email' => 'Gagal masuk menggunakan Google. Silakan coba lagi.']);
-        }
-    }
-
-    /**
-     * Flash upcoming agenda data to session for the registration popup.
-     */
-    private function flashAgendaPopup(User $user)
-    {
-        // Only for members
-        if ($user->role !== 'member') return;
-
-        $upcomingAgenda = \App\Models\Agenda::where('status', 'upcoming')
-            ->where('registration_enabled', true)
-            ->where('event_date', '>=', now()->startOfDay())
-            ->orderBy('event_date', 'asc')
-            ->first();
-
-        if ($upcomingAgenda) {
-            $isAlreadyRegistered = \App\Models\AgendaRegistration::where('agenda_id', $upcomingAgenda->id)
-                ->where('user_id', $user->id)
-                ->exists();
-
-            if (!$isAlreadyRegistered) {
-                session()->put('show_agenda_popup', true);
-                session()->put('agenda_for_popup', [
-                    'id' => $upcomingAgenda->id,
-                    'title' => $upcomingAgenda->title,
-                    'slug' => $upcomingAgenda->slug,
-                    'event_date' => $upcomingAgenda->event_date->isoFormat('D MMMM Y'),
-                    'location' => $upcomingAgenda->location,
-                ]);
-            }
         }
     }
 }

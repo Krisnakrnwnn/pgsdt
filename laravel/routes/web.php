@@ -263,30 +263,6 @@ Route::get('/email/verify/{id}/{hash}', function (Request $request, $id, $hash) 
         auth()->login($user);
     }
 
-    // Flash upcoming agenda data to session for the registration popup.
-    $upcomingAgenda = \App\Models\Agenda::where('status', 'upcoming')
-        ->where('registration_enabled', true)
-        ->where('event_date', '>=', now()->startOfDay())
-        ->orderBy('event_date', 'asc')
-        ->first();
-
-    if ($upcomingAgenda) {
-        $isAlreadyRegistered = \App\Models\AgendaRegistration::where('agenda_id', $upcomingAgenda->id)
-            ->where('user_id', $user->id)
-            ->exists();
-
-        if (!$isAlreadyRegistered) {
-            $request->session()->put('show_agenda_popup', true);
-            $request->session()->put('agenda_for_popup', [
-                'id' => $upcomingAgenda->id,
-                'title' => $upcomingAgenda->title,
-                'slug' => $upcomingAgenda->slug,
-                'event_date' => $upcomingAgenda->event_date->isoFormat('D MMMM Y'),
-                'location' => $upcomingAgenda->location,
-            ]);
-        }
-    }
-
     return redirect('/')->with('success', 'Email berhasil diverifikasi! Akun Anda sekarang aktif.');
 })->name('verification.verify');
 
