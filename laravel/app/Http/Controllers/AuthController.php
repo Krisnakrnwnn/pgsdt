@@ -38,6 +38,7 @@ class AuthController extends Controller
                 return redirect()->route('profile.edit')->with('info', 'Harap lengkapi profil Anda (NIK, No. HP, dan Alamat) untuk menyelesaikan pendaftaran.');
             }
 
+            $this->flashAgendaPopup($user);
             return redirect()->intended('/');
         }
 
@@ -149,30 +150,7 @@ class AuthController extends Controller
         $user->desa = $request->desa;
         $user->save();
 
-        // Trigger agenda popup after saving changes
-        // Only if user is not already registered for the upcoming agenda
-        $upcomingAgenda = \App\Models\Agenda::where('status', 'upcoming')
-            ->where('registration_enabled', true)
-            ->where('event_date', '>=', now())
-            ->orderBy('event_date', 'asc')
-            ->first();
-
-        if ($upcomingAgenda) {
-            $isAlreadyRegistered = \App\Models\AgendaRegistration::where('agenda_id', $upcomingAgenda->id)
-                ->where('user_id', $user->id)
-                ->exists();
-
-            if (!$isAlreadyRegistered) {
-                $request->session()->flash('show_agenda_popup', true);
-                $request->session()->flash('agenda_for_popup', [
-                    'id' => $upcomingAgenda->id,
-                    'title' => $upcomingAgenda->title,
-                    'slug' => $upcomingAgenda->slug,
-                    'event_date' => $upcomingAgenda->event_date->isoFormat('D MMMM Y'),
-                    'location' => $upcomingAgenda->location,
-                ]);
-            }
-        }
+        $this->flashAgendaPopup($user);
 
         return redirect()->route('profile')->with('success', 'Profil Anda berhasil diperbarui.');
     }
@@ -220,9 +198,6 @@ class AuthController extends Controller
         try {
             $googleUser = Socialite::driver('google')->user();
             
-            // Clear any lingering agenda popup session during login
-            // We only want it to appear after profile update
-            session()->forget(['show_agenda_popup', 'agenda_for_popup']);
             $user = User::where('google_id', $googleUser->id)->first();
 
             if ($user) {
@@ -300,10 +275,43 @@ class AuthController extends Controller
                 return redirect()->route('profile.edit')->with('info', 'Harap lengkapi profil Anda (NIK, No. HP, dan Alamat) untuk menyelesaikan pendaftaran.');
             }
 
+            $this->flashAgendaPopup($user);
             return redirect()->intended('/');
 
         } catch (Exception $e) {
             return redirect('/login')->withErrors(['email' => 'Gagal masuk menggunakan Google. Silakan coba lagi.']);
+        }
+    }
+
+    /**
+     * Flash upcoming agenda data to session for the registration popup.
+     */
+    private function flashAgendaPopup(User $user)
+    {
+        // Only for members
+        if ($user->role !== 'member') return;
+
+        $upcomingAgenda = \App\Models\Agenda::where('status', 'upcoming')
+            ->where('registration_enabled', true)
+            ->where('event_date', '>=', now())
+            ->orderBy('event_date', 'asc')
+            ->first();
+
+        if ($upcomingAgenda) {
+            $isAlreadyRegistered = \App\Models\AgendaRegistration::where('agenda_id', $upcomingAgenda->id)
+                ->where('user_id', $user->id)
+                ->exists();
+
+            if (!$isAlreadyRegistered) {
+                session()->flash('show_agenda_popup', true);
+                session()->flash('agenda_for_popup', [
+                    'id' => $upcomingAgenda->id,
+                    'title' => $upcomingAgenda->title,
+                    'slug' => $upcomingAgenda->slug,
+                    'event_date' => $upcomingAgenda->event_date->isoFormat('D MMMM Y'),
+                    'location' => $upcomingAgenda->location,
+                ]);
+            }
         }
     }
 }
