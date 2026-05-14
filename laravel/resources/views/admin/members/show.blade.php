@@ -20,17 +20,6 @@
         </div>
         
         <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-            @if($member->member_status == 'pending')
-            <form action="{{ route('admin.members.verify', $member->id) }}" method="POST" style="display: inline;">
-                @csrf
-                <button type="submit" class="btn-primary" style="padding: 10px 20px; font-size: 0.85rem; display: flex; align-items: center; gap: 8px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                    Verifikasi Anggota
-                </button>
-            </form>
-            @endif
             
             <a href="{{ route('admin.members.edit', $member->id) }}" class="btn-outline" style="padding: 10px 20px; font-size: 0.85rem; display: flex; align-items: center; gap: 8px; text-decoration: none;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -61,16 +50,6 @@
                 <h3 style="color: var(--primary-dark); margin-bottom: 8px; font-size: 1.3rem;">{{ $member->name }}</h3>
                 <p style="color: #888; font-size: 0.85rem; margin-bottom: 15px;">{{ $member->email }}</p>
                 
-                <!-- STATUS BADGE -->
-                <div style="margin-bottom: 20px;">
-                    @if($member->member_status == 'active')
-                        <span class="status-badge status-active" style="padding: 6px 16px; font-size: 0.85rem;">✓ Aktif</span>
-                    @elseif($member->member_status == 'rejected')
-                        <span class="status-badge" style="padding: 6px 16px; font-size: 0.85rem; background: rgba(255, 107, 107, 0.1); color: #ff6b6b;">✕ Ditolak</span>
-                    @else
-                        <span class="status-badge status-pending" style="padding: 6px 16px; font-size: 0.85rem;">⏳ Menunggu</span>
-                    @endif
-                </div>
                 
                 <!-- REGISTRATION INFO -->
                 <div style="border-top: 1px solid #eee; padding-top: 20px; text-align: left;">
@@ -81,14 +60,6 @@
                     <div style="margin-bottom: 12px;">
                         <span style="color: #888; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 4px;">Tanggal Bergabung</span>
                         <span style="color: var(--primary-dark); font-size: 0.9rem; font-weight: 600;">{{ $member->created_at->format('d M Y') }}</span>
-                    </div>
-                    <div>
-                        <span style="color: #888; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 4px;">Email Terverifikasi</span>
-                        @if($member->email_verified_at)
-                            <span style="color: #27ae60; font-size: 0.85rem; font-weight: 600;">✓ Ya</span>
-                        @else
-                            <span style="color: #e74c3c; font-size: 0.85rem; font-weight: 600;">✕ Belum</span>
-                        @endif
                     </div>
                 </div>
             </div>

@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="table-container member-edit-page" style="padding: 30px;">
-  <h2 style="margin-bottom: 20px;">Kelola & Verifikasi Anggota</h2>
+  <h2 style="margin-bottom: 20px;">Kelola Data Anggota</h2>
   
   @if ($errors->any())
       <div style="background-color: #ffeaea; color: #d93025; padding: 15px; border-radius: 4px; margin-bottom: 20px;">
@@ -101,14 +101,6 @@
                   </select>
               </div>
 
-              <div style="margin-bottom: 20px;">
-                  <label style="display: block; font-weight: 600; margin-bottom: 8px;">Status Verifikasi</label>
-                  <select name="member_status" style="width: 100%; padding: 10px; border: 1px solid var(--border-color); border-radius: 4px; font-weight: bold; color: var(--primary-dark);">
-                      <option value="pending" {{ $member->member_status == 'pending' ? 'selected' : '' }}>Menunggu Verifikasi (Pending)</option>
-                      <option value="active" {{ $member->member_status == 'active' ? 'selected' : '' }}>Aktif (Disetujui)</option>
-                      <option value="rejected" {{ $member->member_status == 'rejected' ? 'selected' : '' }}>Ditolak</option>
-                  </select>
-              </div>
           </div>
       </div>
 

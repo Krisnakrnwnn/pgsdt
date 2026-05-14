@@ -16,12 +16,6 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
         </div>
-        <select name="status" style="padding: 10px 15px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.9rem; background: white;">
-            <option value="">Semua Status</option>
-            <option value="pending"  {{ request('status') == 'pending'  ? 'selected' : '' }}>⏳ Menunggu</option>
-            <option value="active"   {{ request('status') == 'active'   ? 'selected' : '' }}>✅ Aktif</option>
-            <option value="rejected" {{ request('status') == 'rejected' ? 'selected' : '' }}>❌ Ditolak</option>
-        </select>
         <button type="submit" class="btn-primary" style="padding: 10px 20px; font-size: 0.85rem;">CARI</button>
         <a href="{{ route('admin.members.export') }}{{ request()->has('status') ? '?status='.request('status') : '' }}" class="btn-primary" style="background: var(--accent-gold); color: var(--primary-dark); text-decoration: none; padding: 10px 15px;">EXPORT CSV</a>
         @if(request('search') || request('status'))
@@ -53,11 +47,6 @@
                 Wilayah {!! request('sort') == 'kabupaten' ? (request('direction') == 'asc' ? '↑' : '↓') : '' !!}
             </a>
         </th>
-        <th class="col-status">
-            <a href="{{ route('admin.members.index', array_merge(request()->query(), ['sort' => 'member_status', 'direction' => request('direction') == 'asc' ? 'desc' : 'asc'])) }}" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 5px;">
-                Status {!! request('sort') == 'member_status' ? (request('direction') == 'asc' ? '↑' : '↓') : '' !!}
-            </a>
-        </th>
         <th class="col-aksi">Aksi</th>
       </tr>
     </thead>
@@ -73,27 +62,8 @@
         </td>
         <td class="col-nik">{{ $member->nik ?? '-' }}</td>
         <td class="col-wilayah">{{ $member->kabupaten ?? '-' }}</td>
-        <td class="col-status">
-          @if($member->member_status == 'active')
-            <span class="status-badge status-active">Aktif</span>
-          @elseif($member->member_status == 'rejected')
-            <span class="status-badge status-pending" style="background: rgba(255, 107, 107, 0.1); color: #ff6b6b;">Ditolak</span>
-          @else
-            <span class="status-badge status-pending">Menunggu</span>
-          @endif
-        </td>
         <td class="col-aksi">
           <div class="action-btns">
-            @if($member->member_status == 'pending')
-            <form action="{{ route('admin.members.verify', $member->id) }}" method="POST" style="display:inline;">
-                @csrf
-                <button type="submit" class="btn-icon verify" title="Verifikasi Cepat">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                  </svg>
-                </button>
-            </form>
-            @endif
                 <a href="{{ route('admin.members.show', $member->id) }}" class="btn-icon" title="Lihat Profil Lengkap">
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -119,7 +89,7 @@
       </tr>
       @empty
       <tr>
-          <td colspan="6" style="text-align: center; padding: 50px 0; color: #888;">
+          <td colspan="5" style="text-align: center; padding: 50px 0; color: #888;">
               <div style="font-size: 2rem; margin-bottom: 10px;">🔍</div>
               Data anggota tidak ditemukan.
           </td>

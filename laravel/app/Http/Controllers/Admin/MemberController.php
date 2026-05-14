@@ -61,7 +61,6 @@ class MemberController extends Controller
             'kabupaten' => 'required|string',
             'kecamatan' => 'required|string',
             'desa' => 'required|string',
-            'member_status' => 'required|in:pending,active,rejected',
             'image' => [
                 'nullable',
                 'image',
@@ -87,7 +86,6 @@ class MemberController extends Controller
         $member->kabupaten = $request->kabupaten;
         $member->kecamatan = $request->kecamatan;
         $member->desa = $request->desa;
-        $member->member_status = $request->member_status;
         $member->save();
 
         // Send notification if status changed to active
@@ -135,7 +133,7 @@ class MemberController extends Controller
             'Expires'             => '0',
         ];
 
-        $columns = ['No. Register', 'Nama Lengkap', 'NIK', 'Email', 'No. WhatsApp', 'Kabupaten', 'Kecamatan', 'Desa', 'Status', 'Tanggal Daftar'];
+        $columns = ['No. Register', 'Nama Lengkap', 'NIK', 'Email', 'No. WhatsApp', 'Kabupaten', 'Kecamatan', 'Desa', 'Tanggal Daftar'];
 
         $callback = function () use ($members, $columns) {
             $file = fopen('php://output', 'w');
@@ -152,7 +150,6 @@ class MemberController extends Controller
                     $member->kabupaten ?? '-',
                     $member->kecamatan ?? '-',
                     $member->desa ?? '-',
-                    $member->member_status,
                     $member->created_at->format('Y-m-d H:i:s'),
                 ]);
             }
