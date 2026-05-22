@@ -46,15 +46,15 @@ class AgendaRegistrationController extends Controller
 
         // Header agenda
         $activeWorksheet->setCellValue('A1', 'Daftar Peserta Agenda: ' . $agenda->title);
-        $activeWorksheet->mergeCells('A1:H1');
+        $activeWorksheet->mergeCells('A1:I1');
         $activeWorksheet->getStyle('A1')->getFont()->setBold(true)->setSize(14);
 
         // Header tabel
-        $headers = ['No', 'Nama Lengkap', 'Email', 'No. WhatsApp', 'Status', 'Sumber Informasi', 'Catatan', 'Tanggal Daftar'];
+        $headers = ['No', 'Nama Lengkap', 'Email', 'No. WhatsApp', 'Kabupaten', 'Status', 'Sumber Informasi', 'Catatan', 'Tanggal Daftar'];
         $activeWorksheet->fromArray($headers, NULL, 'A3');
 
         // Style header row
-        $headerRange = 'A3:H3';
+        $headerRange = 'A3:I3';
         $activeWorksheet->getStyle($headerRange)->getFont()->setBold(true);
         $activeWorksheet->getStyle($headerRange)->getFill()
             ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
@@ -69,15 +69,16 @@ class AgendaRegistrationController extends Controller
             $activeWorksheet->setCellValue('B' . $row, $reg->name);
             $activeWorksheet->setCellValue('C' . $row, $reg->user->email ?? '-');
             $activeWorksheet->setCellValue('D' . $row, $reg->phone ?? '-');
-            $activeWorksheet->setCellValue('E' . $row, ucfirst($reg->status));
-            $activeWorksheet->setCellValue('F' . $row, $reg->information_source ?? '-');
-            $activeWorksheet->setCellValue('G' . $row, $reg->notes ?? '-');
-            $activeWorksheet->setCellValue('H' . $row, $reg->created_at->format('Y-m-d H:i:s'));
+            $activeWorksheet->setCellValue('E' . $row, $reg->user->kabupaten ?? '-');
+            $activeWorksheet->setCellValue('F' . $row, ucfirst($reg->status));
+            $activeWorksheet->setCellValue('G' . $row, $reg->information_source ?? '-');
+            $activeWorksheet->setCellValue('H' . $row, $reg->notes ?? '-');
+            $activeWorksheet->setCellValue('I' . $row, $reg->created_at->format('Y-m-d H:i:s'));
             $row++;
         }
 
         // Auto fit column widths
-        foreach (range('A', 'H') as $columnID) {
+        foreach (range('A', 'I') as $columnID) {
             $activeWorksheet->getColumnDimension($columnID)->setAutoSize(true);
         }
 
@@ -90,7 +91,7 @@ class AgendaRegistrationController extends Controller
                 ],
             ],
         ];
-        $activeWorksheet->getStyle('A3:H' . ($row - 1))->applyFromArray($styleArray);
+        $activeWorksheet->getStyle('A3:I' . ($row - 1))->applyFromArray($styleArray);
 
         $safeAgendaTitle = \Illuminate\Support\Str::slug($agenda->title, '_');
         $fileName = 'peserta_agenda_' . $safeAgendaTitle . '_' . date('Y-m-d') . '.xlsx';
