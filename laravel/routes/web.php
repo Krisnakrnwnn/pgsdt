@@ -262,6 +262,7 @@ Route::middleware(['auth', IsAdmin::class])->prefix('admin')->name('admin.')->gr
     Route::delete('news/images/{image}', [AdminNewsController::class, 'destroyImage'])->name('news.images.destroy');
     Route::resource('news', AdminNewsController::class);
     Route::patch('agendas/{agenda}/set-featured', [AdminAgendaController::class, 'setFeatured'])->name('agendas.set-featured');
+    Route::get('agendas/{agenda}/registrations/export', [AdminAgendaRegistrationController::class, 'export'])->name('agendas.registrations.export');
     Route::get('agendas/{agenda}/registrations', [AdminAgendaRegistrationController::class, 'index'])->name('agendas.registrations');
     Route::patch('agendas/registrations/{registration}/status', [AdminAgendaRegistrationController::class, 'updateStatus'])->name('agendas.registrations.status');
     Route::delete('agendas/registrations/{registration}', [AdminAgendaRegistrationController::class, 'destroy'])->name('agendas.registrations.destroy');
