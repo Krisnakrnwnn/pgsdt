@@ -45,13 +45,13 @@
               <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.5) 100%);"></div>
 
               <!-- Pulsing Gold Play Button Overlay -->
-              <div class="play-btn-wrapper" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; pointer-events: none;">
+              <div class="play-btn-wrapper" style="position: absolute; top: calc(50% - 25px); left: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; justify-content: center; pointer-events: none;">
                   <div class="play-btn-circle" style="width: 80px; height: 80px; background: rgba(212, 175, 55, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(212, 175, 55, 0.6); transition: all 0.3s ease;">
                       <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 16 16" style="color: #1a1a1a; margin-left: 4px;">
                           <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
                       </svg>
                   </div>
-                  <span style="display: block; margin-top: 15px; color: #fff; font-family: 'Cinzel', serif; font-size: 0.95rem; font-weight: 700; letter-spacing: 2px; text-shadow: 0 2px 4px rgba(0,0,0,0.8); text-transform: uppercase;">Tonton di YouTube</span>
+                  <span style="position: absolute; top: 100%; left: 50%; transform: translateX(-50%); margin-top: 15px; color: #fff; font-family: 'Cinzel', serif; font-size: 0.95rem; font-weight: 700; letter-spacing: 2px; text-shadow: 0 2px 4px rgba(0,0,0,0.8); text-transform: uppercase; white-space: nowrap;">Tonton di YouTube</span>
               </div>
 
               <!-- Mockup Player Control Bar -->
