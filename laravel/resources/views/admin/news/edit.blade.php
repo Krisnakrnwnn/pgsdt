@@ -50,6 +50,12 @@
         </div>
 
         <div style="margin-bottom: 20px;">
+            <label style="display: block; font-weight: 600; margin-bottom: 8px;">Tautan Video YouTube (Opsional)</label>
+            <input type="url" name="video_url" value="{{ old('video_url', $news->video_url) }}" placeholder="https://www.youtube.com/watch?v=..." style="width: 100%; padding: 10px; border: 1px solid var(--border-color); border-radius: 4px;">
+            <small style="color: var(--text-dim);">Masukkan tautan video YouTube jika berita ini menyertakan video.</small>
+        </div>
+
+        <div style="margin-bottom: 20px;">
             <label style="display: block; font-weight: 600; margin-bottom: 8px;">Tambahkan Gambar (Opsional)</label>
             <input type="file" name="images[]" multiple accept="image/*" style="width: 100%; padding: 10px; border: 1px solid var(--border-color); border-radius: 4px;">
             <small style="color: var(--text-dim);">Gambar yang diunggah di sini akan ditambahkan ke galeri berita.</small>

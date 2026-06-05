@@ -16,12 +16,46 @@ class News extends Model
         'content',
         'category',
         'status',
+        'video_url',
     ];
 
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
+    /**
+     * Get the YouTube video ID from the video_url.
+     */
+    public function getYoutubeIdAttribute()
+    {
+        if (!$this->video_url) {
+            return null;
+        }
+
+        $url = $this->video_url;
+        $parts = parse_url($url);
+        if (isset($parts['host'])) {
+            if ($parts['host'] === 'youtu.be') {
+                return ltrim($parts['path'], '/');
+            }
+            if (in_array($parts['host'], ['www.youtube.com', 'youtube.com', 'm.youtube.com'])) {
+                if (isset($parts['query'])) {
+                    parse_str($parts['query'], $query);
+                    if (isset($query['v'])) {
+                        return $query['v'];
+                    }
+                }
+                if (strpos($parts['path'], '/embed/') === 0) {
+                    return substr($parts['path'], 7);
+                }
+                if (strpos($parts['path'], '/v/') === 0) {
+                    return substr($parts['path'], 3);
+                }
+            }
+        }
+        return null;
+    }
 
     public function images()
     {

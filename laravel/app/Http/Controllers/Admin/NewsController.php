@@ -39,6 +39,7 @@ class NewsController extends Controller
             'category'   => 'nullable|in:pengumuman,kegiatan',
             'content'    => 'required|string|max:100000',
             'status'     => 'required|in:draft,published',
+            'video_url'  => 'nullable|url|max:255',
             'images.*'   => 'image|mimes:jpeg,png,jpg,webp|max:2048',
             'images'     => 'nullable|array|max:10',
         ]);
@@ -51,6 +52,7 @@ class NewsController extends Controller
             'content' => $request->content,
             'category' => $request->category,
             'status' => $request->status,
+            'video_url' => $request->video_url,
         ]);
 
         if ($request->hasFile('images')) {
@@ -78,6 +80,7 @@ class NewsController extends Controller
             'category'   => 'nullable|in:pengumuman,kegiatan',
             'content'    => 'required|string|max:100000',
             'status'     => 'required|in:draft,published',
+            'video_url'  => 'nullable|url|max:255',
             'images.*'   => 'image|mimes:jpeg,png,jpg,webp|max:2048',
             'images'     => 'nullable|array|max:10',
         ]);
@@ -90,6 +93,7 @@ class NewsController extends Controller
         $news->category = $request->category;
         $news->content = $request->content;
         $news->status = $request->status;
+        $news->video_url = $request->video_url;
         $news->save();
 
         if ($request->hasFile('images')) {
