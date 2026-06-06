@@ -95,7 +95,10 @@ Route::get('/', function () {
         ->take(3)
         ->get();
     
-    $latestEvent = \App\Models\Agenda::where('is_featured', true)->first() 
+    $latestEvent = \App\Models\Agenda::where('is_featured', true)
+                                     ->where('status', 'upcoming')
+                                     ->where('event_date', '>=', now())
+                                     ->first() 
                    ?? \App\Models\Agenda::where('status', 'upcoming')
                                          ->where('event_date', '>=', now())
                                          ->orderBy('event_date', 'asc')

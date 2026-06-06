@@ -117,9 +117,12 @@
                 <div class="meta-item" style="background: white; padding: 25px; text-align: center;">
                     <span style="display: block; font-size: 0.75rem; color: #333; font-weight: 700; text-transform: uppercase; margin-bottom: 5px; letter-spacing: 1px;">Status Pendaftaran</span>
                     @php
+                        $isPast = $event->status !== 'upcoming' || $event->event_date->isPast();
                         $isFull = ($event->registrations_count ?? 0) >= $event->quota;
                     @endphp
-                    <strong style="color: {{ $isFull ? '#c0392b' : '#1e8449' }}; font-size: 1.2rem; font-family: 'Cinzel', serif;">{{ $isFull ? 'PENUH' : 'TERSEDIA' }}</strong>
+                    <strong style="color: {{ $isPast ? '#7f8c8d' : ($isFull ? '#c0392b' : '#1e8449') }}; font-size: 1.2rem; font-family: 'Cinzel', serif;">
+                        {{ $isPast ? 'DITUTUP' : ($isFull ? 'PENUH' : 'TERSEDIA') }}
+                    </strong>
                 </div>
             </div>
             @endif
@@ -270,7 +273,10 @@
                     }
                 @endphp
 
-                @if($isRegistered)
+                @if($event->status !== 'upcoming' || $event->event_date->isPast())
+                    <h3 style="font-family: 'Cinzel', serif; font-size: 1.8rem; margin-bottom: 15px; color: var(--accent-gold);">Pendaftaran Ditutup</h3>
+                    <p style="color: #e0e0e0; font-size: 1.1rem; margin-bottom: 0; max-width: 600px; margin-inline: auto;">Pendaftaran telah ditutup karena kegiatan ini telah terlaksana.</p>
+                @elseif($isRegistered)
                     <h3 style="font-family: 'Cinzel', serif; font-size: 1.8rem; margin-bottom: 15px; color: #27ae60;">Anda Sudah Terdaftar</h3>
                     <p style="color: #e0e0e0; font-size: 1.1rem; margin-bottom: 0; max-width: 600px; margin-inline: auto;">Terima kasih telah mendaftar pada agenda ini. Kami tunggu kehadiran Anda.</p>
                 @else

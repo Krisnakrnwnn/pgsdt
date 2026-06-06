@@ -18,6 +18,11 @@ class AgendaRegistrationController extends Controller
             return redirect()->route('events.show', $slug)->with('error', 'Pendaftaran untuk agenda ini tidak dibuka.');
         }
 
+        // Cek apakah agenda sudah terlaksana atau tanggalnya sudah terlewati
+        if ($agenda->status !== 'upcoming' || $agenda->event_date->isPast()) {
+            return redirect()->route('events.show', $slug)->with('error', 'Pendaftaran tidak dapat dilakukan karena agenda ini telah selesai atau dibatalkan.');
+        }
+
         // Cek apakah sudah terdaftar
         $isRegistered = AgendaRegistration::where('agenda_id', $agenda->id)
                                           ->where('user_id', Auth::id())
@@ -46,6 +51,11 @@ class AgendaRegistrationController extends Controller
         // Cek apakah registrasi diaktifkan
         if (!$agenda->registration_enabled) {
             return redirect()->route('events.show', $slug)->with('error', 'Pendaftaran untuk agenda ini tidak dibuka.');
+        }
+
+        // Cek apakah agenda sudah terlaksana atau tanggalnya sudah terlewati
+        if ($agenda->status !== 'upcoming' || $agenda->event_date->isPast()) {
+            return redirect()->route('events.show', $slug)->with('error', 'Pendaftaran tidak dapat dilakukan karena agenda ini telah selesai atau dibatalkan.');
         }
 
         // Validasi duplikat
